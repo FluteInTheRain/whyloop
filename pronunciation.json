@@ -62,5 +62,11 @@
   "QDA": "<en>q d a</en>",
   "ROC": "<en>r o c</en>",
   "AUC": "<en>a u c</en>",
-  "Gaussian": "gau xiên"
+  "Gaussian": "gau xiên",
+  "LOOCV": "<en>l o o c v</en>",
+  "CV": "<en>c v</en>",
+  "validation": "vã li đây sần",
+  "fold": "phôn",
+  "k-fold": "ca phôn",
+  "leverage": "lê vơ rịch"
 }
