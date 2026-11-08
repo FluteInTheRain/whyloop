@@ -111,62 +111,57 @@
   {
    "id": "data",
    "vo": "promo/vo/data.wav",
-   "voFrames": 393,
+   "voFrames": 331,
    "lead": 12,
-   "durationInFrames": 429,
+   "durationInFrames": 367,
    "sentences": [
     {
      "text": "The script is not typed.",
      "from": 12,
-     "to": 62
+     "to": 64
     },
     {
      "text": "It is generated from simulated data and models fitted from scratch.",
-     "from": 62,
-     "to": 202
+     "from": 64,
+     "to": 209
     },
     {
-     "text": "So every number you see on screen, and every number you hear, comes from the same computed value.",
-     "from": 202,
-     "to": 405
+     "text": "So every number you see, and hear, is the same computed value.",
+     "from": 209,
+     "to": 343
     }
    ]
   },
   {
    "id": "lint",
    "vo": "promo/vo/lint.wav",
-   "voFrames": 380,
+   "voFrames": 289,
    "lead": 12,
-   "durationInFrames": 416,
+   "durationInFrames": 336,
    "sentences": [
     {
-     "text": "Before anything renders, a layout linter opens each beat in headless Chrome and measures the real text boxes.",
+     "text": "Before anything renders, a layout linter measures the real text boxes in headless Chrome.",
      "from": 12,
-     "to": 243
+     "to": 204
     },
     {
-     "text": "One overlap, one word off the screen, and the render refuses to start.",
-     "from": 243,
-     "to": 392
+     "text": "One overlap, and the render refuses to start.",
+     "from": 204,
+     "to": 301
     }
    ]
   },
   {
    "id": "sound",
    "vo": "promo/vo/sound.wav",
-   "voFrames": 296,
+   "voFrames": 283,
    "lead": 12,
-   "durationInFrames": 332,
+   "durationInFrames": 319,
    "sentences": [
     {
-     "text": "Then comes sound.",
+     "text": "Then comes sound: English narration, and a Vietnamese dub fitted into the exact time slot of every beat, over generated music.",
      "from": 12,
-     "to": 50
-    },
-    {
-     "text": "English narration, plus a Vietnamese dub fitted into the exact time slot of every beat, mixed with generated music.",
-     "from": 50,
-     "to": 308
+     "to": 295
     }
    ]
   },

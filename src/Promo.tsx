@@ -85,8 +85,14 @@ const Pain = () => {
         <span style={{ fontSize: 190, fontWeight: 700, color: C.red }}>×36</span>
         <div style={{ fontSize: 44, color: C.text, marginTop: -10 }}>episodes planned for one series</div>
       </div>
-      <div style={{ position: "absolute", top: 600, width: "100%", display: "flex", justifyContent: "center", opacity: hit }}>
-        <Img src={ico("hourglass-not-done")} style={{ width: 130, height: 130 }} />
+      <div style={{ position: "absolute", top: 520, left: 0, width: 1920, display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 96px)", gap: 14 }}>
+          {Array.from({ length: 36 }, (_, i) => {
+            const t = prog(f, 285 + i * 2, 300 + i * 2);
+            return <Card key={i} style={{ width: 96, height: 72, display: "flex", alignItems: "center", justifyContent: "center", opacity: t, transform: `scale(${0.6 + 0.4 * t})` }}>
+              <Img src={ico("film-reel")} style={{ width: 44, height: 44 }} /></Card>;
+          })}
+        </div>
       </div>
     </AbsoluteFill>
   );
@@ -257,7 +263,7 @@ const Flow = ({ sc }: { sc: PScene }) => {
 };
 
 const Data = () => {
-  const f = useCurrentFrame();
+  const f = useCurrentFrame() * 1.3;
   const lines: [string, number, string][] = [
     ["students = simulate(n=80)", 20, C.text],
     ["fit = newton_irls(students)   # from scratch", 52, C.text],
@@ -296,22 +302,22 @@ const Data = () => {
 };
 
 const Lint = () => {
-  const f = useCurrentFrame();
+  const f = useCurrentFrame() * 1.3;
   const S = 860 / 960, IX = 1000, IY = 190;
   const lines: [string, number, string][] = [
     ["$ ./make-video lint episode --png", 20, C.text],
     ["rendering the end of every beat…  58/58", 60, C.muted],
     ["beat  12 [text-over-text] label overlaps icon", 243, C.red],
-    ["1 vấn đề ở 1/58 beat", 262, C.red],
+    ["1 problem in 1/58 beats", 262, C.red],
     ["$ # fix the script, run again", 300, C.muted],
     ["$ ./make-video lint episode --png", 330, C.text],
-    ["0 vấn đề  ✓", 372, C.green],
+    ["0 problems  ✓", 372, C.green],
   ];
   const boxes: [number, number, number, number][] = [[160, 56, 438, 58], [84, 140, 28, 228], [384, 410, 194, 28], [112, 440, 200, 46], [806, 16, 96, 30]];
   const allGreen = f >= 372;
   return (
     <AbsoluteFill style={{ fontFamily: FONT, transform: "translateY(50px)" }}>
-      <div style={{ position: "absolute", left: 60, top: 190, width: 900, height: 520, background: "#141517", border: "2px solid #3b3e45", borderRadius: 18, padding: "22px 30px" }}>
+      <div style={{ position: "absolute", left: 60, top: 190, width: 900, height: 430, background: "#141517", border: "2px solid #3b3e45", borderRadius: 18, padding: "22px 30px" }}>
         {lines.map(([t, s, c], i) => (
           <div key={i} style={{ fontFamily: MONO, fontSize: 25, lineHeight: "50px", color: c, whiteSpace: "pre", opacity: f >= s ? 1 : 0 }}>{typed(t, f, s, 1.9)}</div>
         ))}
@@ -332,7 +338,7 @@ const Lint = () => {
 };
 
 const Sound = () => {
-  const f = useCurrentFrame();
+  const f = useCurrentFrame() * 1.3;
   const X0 = 330, WID = 1460, SLOTS = 24, PER = 8, N = SLOTS * PER, pitch = WID / N;
   const head = prog(f, 150, 175);
   const play = X0 + WID * prog(f, 50, 300);

@@ -66,7 +66,7 @@ def timeline():
     for s in SCRIPT["scenes"]:
         secs = wav_seconds(PUB / "vo" / f"{s['id']}.wav")
         vo_f = round(secs * FPS)
-        dur = max(MIN_SCENE, LEAD + vo_f + TAIL)
+        dur = max(MIN_SCENE, round(s.get("minSec", 0) * FPS), LEAD + vo_f + TAIL)
         sents = split_sentences(s["vo"]); total = sum(len(x) for x in sents)
         t, parts = LEAD, []
         for x in sents:

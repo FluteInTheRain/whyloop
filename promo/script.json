@@ -20,15 +20,18 @@
     },
     {
       "id": "data",
-      "vo": "The script is not typed. It is generated from simulated data and models fitted from scratch. So every number you see on screen, and every number you hear, comes from the same computed value."
+      "vo": "The script is not typed. It is generated from simulated data and models fitted from scratch. So every number you see, and hear, is the same computed value.",
+      "minSec": 8.8
     },
     {
       "id": "lint",
-      "vo": "Before anything renders, a layout linter opens each beat in headless Chrome and measures the real text boxes. One overlap, one word off the screen, and the render refuses to start."
+      "vo": "Before anything renders, a layout linter measures the real text boxes in headless Chrome. One overlap, and the render refuses to start.",
+      "minSec": 11.2
     },
     {
       "id": "sound",
-      "vo": "Then comes sound. English narration, plus a Vietnamese dub fitted into the exact time slot of every beat, mixed with generated music."
+      "vo": "Then comes sound: English narration, and a Vietnamese dub fitted into the exact time slot of every beat, over generated music.",
+      "minSec": 8.2
     },
     {
       "id": "result",

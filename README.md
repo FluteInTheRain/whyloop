@@ -17,7 +17,7 @@ music, thumbnail, captions and upload metadata. Everything renders locally.
 
 <p align="center"><a href="https://github.com/FluteInTheRain/whyloop/releases/tag/intro-v1"><img src="docs/img/promo-flow.gif" alt="The six steps of the WhyLoop pipeline, sped up: chapter, Python, script.json, lint, render, publish" width="720"></a></p>
 
-**[▶ Watch the full introduction (2:08, English)](https://github.com/FluteInTheRain/whyloop/releases/tag/intro-v1)**: open the release and
+**[▶ Watch the full introduction (2:03, English)](https://github.com/FluteInTheRain/whyloop/releases/tag/intro-v1)**: open the release and
 play or download `whyloop-intro.mp4`. The clip above is the part that explains the flow, sped up. The video was made with this
 project itself (`src/Promo.tsx`, `promo/`).
 
