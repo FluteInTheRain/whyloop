@@ -13,6 +13,10 @@ music, thumbnail, captions and upload metadata. Everything renders locally.
 | Output | 2560×1440, English picture with English audio, plus a same-length Vietnamese audio track |
 | Code | about 6.7k lines of TypeScript, Python and JS (Remotion front end, Python engine) |
 
+<p align="center"><img src="docs/img/pipeline.svg" alt="One script feeds both the picture and the sound; the layout lint blocks a bad render before it starts"></p>
+
+*One script feeds both the picture and the sound. The layout lint stops a bad render before it starts (red loop).*
+
 ![Machine Learning #4: bias vs variance](docs/img/thumb-04.jpg)
 
 ## What I built
@@ -31,25 +35,6 @@ music, thumbnail, captions and upload metadata. Everything renders locally.
   v3, dry-run first, private by default), with progress tracking safe for parallel renders.
 - **Brand and asset tooling:** a themed design system, intro/outro clips cached per voice, a licence-filtered icon
   library of about 730 icons, and a thumbnail generator that draws a real-life metaphor scene per episode.
-
-## Pipeline
-
-```mermaid
-flowchart LR
-    B[Textbook chapter] --> S[gen_script.py<br/>simulate data, fit models]
-    S --> J[script.json<br/>EN text + VI text per beat]
-    J --> C[check + lint<br/>headless Chrome]
-    C -->|0 problems| R[Remotion render<br/>2560x1440]
-    J --> T1[Kokoro TTS<br/>English]
-    J --> T2[VieNeu TTS<br/>Vietnamese dub]
-    M[ACE-Step music] --> F
-    T1 --> F[ffmpeg mix<br/>loudness -16 LUFS]
-    T2 --> F
-    R --> F
-    F --> O[mp4 EN + m4a VI]
-    O --> P[upload pack<br/>captions, description,<br/>thumbnail]
-    P --> Y[YouTube Data API]
-```
 
 ## What it looks like
 
@@ -87,17 +72,48 @@ LICENSES.md          licence and copyright review of every component
 CLAUDE.md            the rules the AI assistant follows when making an episode
 ```
 
-## Run it
+## Install
 
-Setup, voices and music are covered in the [usage manual](docs/USAGE.md). The repo does not contain the TTS models, the
-rendered media, the background music or the voice samples, so a fresh clone needs `./scripts/setup.sh` and your own
-voice and music first. YouTube credentials live outside the repo (`~/.config/whyloop/`).
+Developed and tested on macOS (Apple Silicon, M4 Pro, 48 GB). Linux and Windows are untested. Models are downloaded on
+first use, so the first run needs internet and several GB of disk.
+
+**1. Prerequisites**
+
+```bash
+brew install uv node ffmpeg espeak-ng     # espeak-ng is needed by the English voice (Kokoro)
+```
+
+**2. Get the code and the tools**
+
+```bash
+git clone https://github.com/FluteInTheRain/whyloop.git && cd whyloop
+./scripts/setup.sh    # clones VieNeu-TTS and ACE-Step into tools/, makes the Kokoro venv, npm install, builds sound effects
+```
+
+**3. Things the repo does not ship** (media, music and voice samples are generated or yours)
+
+```bash
+./make-video voice add my-voice.wav --name "Me"   # optional: clone your own Vietnamese voice (VieNeu presets work without it)
+uv run --project tools/acestep python scripts/gen_music.py --duration 40 --out assets/music/lofi_chill.wav \
+  --caption "lo-fi hip hop, mellow electric piano, soft drums, warm vinyl texture, relaxed study beat"   # base music track (ACE-Step)
+./make-video brand build                          # intro and outro clips
+npm run studio                                    # open Remotion Studio to check that rendering works
+```
+
+**4. Make an episode**
+
+Open Claude Code in the project folder and run `/make-video <topic>`. It writes `series/<series>/episodes/<NN-slug>/script.json`
+(start from a file in `templates/`), then:
 
 ```bash
 ./make-video check  series/<series>/episodes/<episode>
-./make-video lint   series/<series>/episodes/<episode> --png
-./make-video render series/<series>/episodes/<episode>
+./make-video lint   series/<series>/episodes/<episode> --png   # must print "0 vấn đề" (0 problems)
+./make-video render series/<series>/episodes/<episode>         # also re-runs the lint and refuses on problems
 ```
+
+Uploading needs your own Google OAuth client; credentials live in `~/.config/whyloop/`, never in the repo. Full steps for
+every command, voice mixing, the book workflow and YouTube are in the [usage manual](docs/USAGE.md).
+Episode folders are not part of this public repo, so the commands above need an episode you create yourself.
 
 ## How AI was used
 

@@ -2,7 +2,9 @@
 """Generate one instrumental track with ACE-Step. Run under tools/acestep venv.
 Usage: gen_music.py --caption "..." --duration 120 --seed 7 --out path.wav"""
 import argparse, os, sys, shutil, tempfile
-ROOT = "/Users/khang/generate-video/tools/acestep"
+from pathlib import Path
+ROOT = str(Path(__file__).resolve().parent.parent / "tools" / "acestep")
+CWD = os.getcwd()
 sys.path.insert(0, ROOT)
 os.chdir(ROOT)
 
@@ -12,6 +14,7 @@ ap.add_argument("--duration", type=int, required=True)
 ap.add_argument("--seed", type=int, default=7)
 ap.add_argument("--out", required=True)
 a = ap.parse_args()
+a.out = os.path.join(CWD, a.out)  # relative --out is relative to where the command was run
 
 from acestep.handler import AceStepHandler
 from acestep.llm_inference import LLMHandler

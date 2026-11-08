@@ -15,4 +15,4 @@ if [ "${#PARENT[@]}" -gt 0 ] && [ "$(git rev-parse refs/heads/public^{tree})" = 
   C="$(git commit-tree "$TREE" ${PARENT[@]+"${PARENT[@]}"} -m "Update from main@$(git rev-parse --short HEAD): $(git log -1 --format=%s)")"
   git update-ref refs/heads/public "$C"; echo "public -> $(git rev-parse --short "$C")"
 fi
-if [ "${1:-}" = "--push" ]; then git push origin public:main; fi
+if [ "${1:-}" = "--push" ]; then git push origin refs/heads/public:refs/heads/main; fi
