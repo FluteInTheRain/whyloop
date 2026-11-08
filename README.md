@@ -109,7 +109,7 @@ npm run studio                                    # open Remotion Studio to chec
 **4. Make an episode**
 
 Open Claude Code in the project folder and run `/make-video <topic>`. It writes `series/<series>/episodes/<NN-slug>/script.json`
-(start from a file in `templates/`), then:
+(start from a file in `templates/`, or run the self-contained example in [Make your own video](#make-your-own-video-customise-it) first), then:
 
 ```bash
 ./make-video check  series/<series>/episodes/<episode>
@@ -120,6 +120,49 @@ Open Claude Code in the project folder and run `/make-video <topic>`. It writes 
 Uploading needs your own Google OAuth client; credentials live in `~/.config/whyloop/`, never in the repo. Full steps for
 every command, voice mixing, the book workflow and YouTube are in the [usage manual](docs/USAGE.md).
 Episode folders are not part of this public repo, so the commands above need an episode you create yourself.
+
+## Make your own video (customise it)
+
+You do not need the author's content. The repo includes a small bilingual example that runs end to end:
+
+```bash
+./make-video check  examples/hello-whyloop                  # errors, layout and pronunciation warnings
+./make-video lint   examples/hello-whyloop --png            # must print "0 vấn đề" (= 0 problems)
+./make-video render examples/hello-whyloop --mode demo \
+    --voice "Hải Đăng" --music lofi_chill --no-dub           # ~30 s preview, English voice, no Vietnamese dub
+```
+
+`--voice "Hải Đăng"` is a built-in preset (the default `Khang Mix` is the author's own cloned voice). `lofi_chill` needs
+`assets/music/lofi_chill.wav` (install step 3), or use your own WAV: put it in `assets/music/`, add its name to `config.json → music`,
+and pass `--music <name>`. Results are written to `out/`.
+
+**What to edit to make it yours**
+
+| I want to change... | Edit |
+|---|---|
+| The topic and the words | `script.json`: nodes on a grid, and beats (`text` = English, `text_vi` = Vietnamese dub, `do` = what changes on screen). Start from `examples/` or `templates/` |
+| Computed numbers | write a `gen_script.py` that simulates and fits, and let it write `script.json`, so picture and voice-over share one value |
+| Colours and style | `config.json → theme` or `--theme dusk` (also `neon`, `terminal`, `ai`, ...); your own theme: copy a block in `src/theme.ts` |
+| Channel name, tagline, font, avatar | `config.json → channel`, `assets/brand/avatar.png`, then `./make-video brand build --force` |
+| Voice, music, language | `config.json → voices`, `music`; `meta.audio_langs` (`["en"]` for one language, or `--no-dub`) |
+| Resolution | `config.json → render.scale`: `1` = 1080p, `4/3` = 2560x1440, `2` = 4K (`WHYLOOP_RENDER_SCALE=1` for one run) |
+| Pronunciation | `pronunciation.json` (Vietnamese), `pronunciation.en.json` (English); hear a line with `./make-video say "..."` |
+| A first draft by AI | Claude Code: `/make-video <topic>` (rules in `CLAUDE.md`) |
+
+**Weak computer or cloud.** The heavy steps are music generation (ACE-Step, wants a GPU or Apple Silicon), the Vietnamese dub
+(VieNeu) and frame rendering. On a weak machine: use your own music file instead of generating it, add `--no-dub`, and render
+small and light:
+
+```bash
+WHYLOOP_RENDER_SCALE=1 WHYLOOP_RENDER_CONCURRENCY=2 ./make-video render <episode> --voice "Hải Đăng" --music <name> --no-dub
+```
+
+`check` and `lint` are cheap: fix the layout first, render last. On a rented Linux machine (untested by me) install `ffmpeg`,
+`espeak-ng`, Node 20+, `uv` and Chrome's system libraries, skip `scripts/setup.sh` if you do not want ACE-Step and VieNeu, set
+`WHYLOOP_RENDER_GL=swangle` when there is no GPU, and render there while you write scripts on your laptop.
+Remotion Lambda / Cloud Run are not wired into this pipeline.
+
+Full guide with the script format, themes, voices, a cloud recipe and troubleshooting: **[docs/CUSTOMIZE.md](docs/CUSTOMIZE.md)**.
 
 ## How AI was used
 
