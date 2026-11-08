@@ -129,8 +129,10 @@ noted in [LICENSES.md](LICENSES.md).
 
 ## Licence
 
-The code is MIT-licensed ([LICENSE](LICENSE)). The WhyLoop name, the mascot and `assets/brand/` are not, and Remotion has its
-own terms for larger companies: see [LICENSES.md](LICENSES.md).
+The source code is MIT-licensed ([LICENSE](LICENSE)). Not covered by it: the WhyLoop name, the mascot Bít and `assets/brand/`
+(all rights reserved); the third-party icons in `assets/library/` (each set keeps its own licence, see
+`assets/library/ATTRIBUTION.md`); and the tools the project builds on (Remotion, VieNeu-TTS, ACE-Step, Kokoro, ffmpeg).
+Remotion has its own terms for larger companies. Details: [LICENSES.md](LICENSES.md).
 
 ## Credits
 
