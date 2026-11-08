@@ -11,7 +11,7 @@ export type ThumbProps = {
   line1?: string; line2?: string; series?: string; caption?: string;
   lines?: string[]; lineSize?: number;   // variant A: big title lines (default: the Vietnamese three-line title)
   tex?: string; texSize?: number;        // variant B headline formula (default f(X)+ε)
-  figure?: "f" | "fits" | "bv" | "u" | "knn" | "sky" | "bridge" | "fork" | "exam" | "darts" | "map" | "springs" | "band" | "stall" | "jug" | "traps" | "switch" | "sbend" | "paradox" | "cafe";          // picture on the right: episode 1 "f" (data, f, noise), episode 2 "fits" (line, truth, wiggle), episode 4 "bv" (bias, variance, the U)
+  figure?: "f" | "fits" | "bv" | "u" | "knn" | "sky" | "bridge" | "fork" | "exam" | "darts" | "map" | "springs" | "band" | "stall" | "jug" | "traps" | "switch" | "sbend" | "paradox" | "cafe" | "hills" | "corral";          // picture on the right: episode 1 "f" (data, f, noise), episode 2 "fits" (line, truth, wiggle), episode 4 "bv" (bias, variance, the U)
 };
 
 // deterministic scatter around 2 + 4*sqrt(x), the same picture the lesson builds
@@ -225,8 +225,55 @@ const Illus = ({ kind, w = 1280, h = 720 }: { kind: "sky" | "bridge"; w?: number
 };
 
 // ---- scenes for the "life metaphor" thumbnails (one full-frame illustration per episode) ----
-const Scene = ({ kind, w = 1280, h = 720 }: { kind: "fork" | "exam" | "darts" | "map" | "springs" | "band" | "stall" | "jug" | "traps" | "switch" | "sbend" | "paradox" | "cafe"; w?: number; h?: number }) => {
+const Scene = ({ kind, w = 1280, h = 720 }: { kind: "fork" | "exam" | "darts" | "map" | "springs" | "band" | "stall" | "jug" | "traps" | "switch" | "sbend" | "paradox" | "cafe" | "hills" | "corral"; w?: number; h?: number }) => {
   const r = lcg(11);
+  if (kind === "hills") {
+    // episode 15: two bell-shaped hills (big cyan = genuine, small red = fake) with a purple fence where they cross (the LDA boundary); few objects, big labels
+    const base = 620, hill = (cx: number, a: number, sg: number, x: number) => base - a * Math.exp(-((x - cx) ** 2) / (2 * sg * sg));
+    const g = { cx: 800, a: 330, sg: 140 }, f = { cx: 1110, a: 190, sg: 100 };
+    const path = (c: { cx: number; a: number; sg: number }) => Array.from({ length: 129 }, (_, i) => { const x = i * 10; return `${i ? "L" : "M"}${x} ${hill(c.cx, c.a, c.sg, x).toFixed(1)}`; }).join("") + ` L${w} ${base} L0 ${base}Z`;
+    let fx = 940; for (let x = g.cx; x < f.cx; x += 1) { if (hill(f.cx, f.a, f.sg, x) <= hill(g.cx, g.a, g.sg, x)) { fx = x; break; } }
+    const note = (x: number, y: number, col: string, k: string) => <g key={k} transform={`translate(${x} ${y})`}><rect x={-34} y={-20} width={68} height={40} rx={6} fill={col} stroke="#fff" strokeWidth={4} /><circle r={11} fill="none" stroke="#fff" strokeWidth={4} /></g>;
+    return (
+      <svg width={w} height={h} style={{ position: "absolute", left: 0, top: 0 }}>
+        <defs><linearGradient id="hlg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#1b2350" /><stop offset="1" stopColor="#0c1028" /></linearGradient></defs>
+        <rect width={w} height={h} fill="url(#hlg)" />
+        <path d={path(g)} fill="#22d3ee" fillOpacity={0.3} stroke="#22d3ee" strokeWidth={10} />
+        <path d={path(f)} fill="#ff5c5c" fillOpacity={0.34} stroke="#ff5c5c" strokeWidth={10} />
+        <rect y={base} width={w} height={h - base} fill="#2a2018" /><rect y={base} width={w} height={10} fill="#4a3a2a" />
+        {[-70, 0, 70].map((d, i) => note(g.cx + d - 20, base - 70, "#22d3ee", "g" + i))}
+        {note(g.cx - 35, base - 135, "#22d3ee", "g3")}{note(g.cx + 35, base - 135, "#22d3ee", "g4")}
+        {note(f.cx + 10, base - 60, "#ff5c5c", "f0")}
+        <g>
+          <rect x={fx - 8} y={base - 260} width={16} height={260} rx={6} fill="#a97bff" stroke="#fff" strokeWidth={4} />
+          <rect x={fx - 70} y={base - 205} width={140} height={14} rx={6} fill="#a97bff" stroke="#fff" strokeWidth={3} />
+          <rect x={fx - 70} y={base - 150} width={140} height={14} rx={6} fill="#a97bff" stroke="#fff" strokeWidth={3} />
+        </g>
+        <text x={fx} y={base - 285} textAnchor="middle" fontSize={40} fontWeight={800} fill="#a97bff" stroke="#0b0f1a" strokeWidth={9} paintOrder="stroke" fontFamily="inherit">boundary</text>
+        <text x={g.cx - 120} y={hill(g.cx, g.a, g.sg, g.cx - 120) - 24} textAnchor="middle" fontSize={46} fontWeight={800} fill="#22d3ee" stroke="#0b0f1a" strokeWidth={10} paintOrder="stroke" fontFamily="inherit">genuine</text>
+        <text x={f.cx + 40} y={hill(f.cx, f.a, f.sg, f.cx) - 24} textAnchor="middle" fontSize={46} fontWeight={800} fill="#ff5c5c" stroke="#0b0f1a" strokeWidth={10} paintOrder="stroke" fontFamily="inherit">fake</text>
+      </svg>
+    );
+  }
+  if (kind === "corral") {
+    // episode 16: a tight herd of genuine notes inside a curved purple corral, sloppy red fakes outside; a straight fence cuts through the herd (crossed out); few objects, big labels
+    const cx = 850, cy = 380;
+    const gen = [[-90, -35], [-30, -50], [30, -35], [90, -20], [-70, 25], [-10, 10], [50, 25], [-40, 60], [20, 70], [95, 45], [-110, 10]].map(([x, y]) => ({ x: cx + x, y: cy + y }));
+    const fak = [[-300, -120], [-250, 80], [330, -150], [330, 150], [250, 215], [-130, 215], [60, 230], [-320, 150]].map(([x, y]) => ({ x: cx + x, y: cy + y }));
+    const note = (p: { x: number; y: number }, col: string, k: string) => <g key={k} transform={`translate(${p.x} ${p.y})`}><rect x={-30} y={-18} width={60} height={36} rx={5} fill={col} stroke="#fff" strokeWidth={3.5} /><circle r={10} fill="none" stroke="#fff" strokeWidth={3.5} /></g>;
+    return (
+      <svg width={w} height={h} style={{ position: "absolute", left: 0, top: 0 }}>
+        <defs><linearGradient id="crg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#1b2350" /><stop offset="1" stopColor="#0c1028" /></linearGradient></defs>
+        <rect width={w} height={h} fill="url(#crg)" />
+        <line x1={cx - 190} y1={cy + 250} x2={cx + 190} y2={cy - 250} stroke="#c9ccd6" strokeWidth={12} strokeDasharray="30 18" strokeLinecap="round" opacity={0.9} />
+        <ellipse cx={cx} cy={cy} rx={210} ry={125} transform={`rotate(-12 ${cx} ${cy})`} fill="#a97bff" fillOpacity={0.14} stroke="#a97bff" strokeWidth={14} />
+        {fak.map((p, i) => note(p, "#ff5c5c", "f" + i))}{gen.map((p, i) => note(p, "#22d3ee", "g" + i))}
+        <g transform={`translate(${cx + 150} ${cy - 205})`}><circle r={38} fill="#ff5c5c" stroke="#fff" strokeWidth={6} /><path d="M-15 -15L15 15M15 -15L-15 15" stroke="#fff" strokeWidth={9} strokeLinecap="round" /></g>
+        <text x={cx} y={cy + 190} textAnchor="middle" fontSize={44} fontWeight={800} fill="#a97bff" stroke="#0b0f1a" strokeWidth={10} paintOrder="stroke" fontFamily="inherit">curved fence</text>
+        <text x={cx + 300} y={cy + 10} textAnchor="middle" fontSize={34} fontWeight={800} fill="#c9ccd6" stroke="#0b0f1a" strokeWidth={9} paintOrder="stroke" fontFamily="inherit">straight line</text>
+      </svg>
+    );
+  }
   if (kind === "paradox") {
     // episode 14: a small clinic with few mild patients (15%) next to a big city hospital with a long queue of severe cases (28%): the worse-looking place treats the sickest
     const rp = lcg(14);
@@ -644,12 +691,12 @@ export const ThumbnailCover = ({ variant = "F", series = "MACHINE LEARNING · 05
   if (variant === "J" || variant === "K" || variant === "S") {
     const mali = brandFont("mali");
     const longest = Math.max(...lines.map((t) => t.length));
-    const budget = ({ fork: 900, darts: 720, paradox: 880 } as Record<string, number>)[figure as string] ?? 600;   // text width available before the scene's objects
+    const budget = ({ fork: 900, darts: 720, paradox: 880, hills: 640, corral: 640 } as Record<string, number>)[figure as string] ?? 600;   // text width available before the scene's objects
     const fs = Math.min(150, Math.round(budget / (longest * 0.58)));
     const edge = { WebkitTextStroke: "10px #0b0f1a", paintOrder: "stroke fill" as const };
     return (
       <AbsoluteFill style={{ background: "#0b1030", fontFamily: mali, color: C.text }}>
-        {variant === "S" && (figure === "fork" || figure === "exam" || figure === "darts" || figure === "map" || figure === "springs" || figure === "band" || figure === "stall" || figure === "jug" || figure === "traps" || figure === "cafe" || figure === "switch" || figure === "sbend" || figure === "paradox") ? <Scene kind={figure} w={1280} h={720} /> : <Illus kind={variant === "J" || figure === "sky" ? "sky" : "bridge"} w={1280} h={720} />}
+        {variant === "S" && (figure === "fork" || figure === "exam" || figure === "darts" || figure === "map" || figure === "springs" || figure === "band" || figure === "stall" || figure === "jug" || figure === "traps" || figure === "cafe" || figure === "switch" || figure === "sbend" || figure === "paradox" || figure === "hills" || figure === "corral") ? <Scene kind={figure} w={1280} h={720} /> : <Illus kind={variant === "J" || figure === "sky" ? "sky" : "bridge"} w={1280} h={720} />}
         <div style={{ position: "absolute", left: 60, top: 44, fontSize: 30, fontWeight: 700, letterSpacing: 6, color: C.go, ...edge }}>{series}</div>
         {lines.map((t, i) => (
           <div key={i} style={{ position: "absolute", left: 54, top: 90 + i * fs * 1.02, fontSize: fs, fontWeight: 700, letterSpacing: -fs / 34,
@@ -675,6 +722,8 @@ export const ThumbnailCover = ({ variant = "F", series = "MACHINE LEARNING · 05
             sbend: { l: 690, t: 330, z: 190, e: "aha", lk: "right", p: "right" },
             switch: { l: 560, t: 440, z: 190, e: "wink", lk: "right", p: "right" },
             paradox: { l: 400, t: 330, z: 190, e: "think", lk: "right", p: "right" },
+            hills: { l: 60, t: 440, z: 190, e: "aha", lk: "right", p: "eureka" },
+            corral: { l: 60, t: 440, z: 190, e: "wow", lk: "right", p: "right" },
             bridge: { l: 1090, t: 460, z: 190, e: "aha", lk: "left", p: "eureka" },
             sky: { l: 1090, t: 520, z: 190, e: "aha", lk: "left", p: "eureka" },
           };

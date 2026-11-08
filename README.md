@@ -32,7 +32,7 @@ music, thumbnail, captions and upload metadata. Everything renders locally.
   Chrome with the real theme and font, measures element boxes, and fails the build on text over text, text crossing a
   frame border, text off-screen, or text in the logo corner. `render` refuses to start until it prints zero problems.
 - **A CLI that runs the whole chain** (`./make-video`): check, lint, render, captions, catalog, YouTube upload (Data API
-  v3, dry-run first, private by default), with progress tracking safe for parallel renders.
+  v3, dry-run first, public by default), with progress tracking safe for parallel renders.
 - **Brand and asset tooling:** a themed design system, intro/outro clips cached per voice, a licence-filtered icon
   library of about 730 icons, and a thumbnail generator that draws a real-life metaphor scene per episode.
 
@@ -126,6 +126,11 @@ assistant executes them under those rules.
 Visuals are vector animation only, with no live-action footage or AI-generated images. Narration length varies by
 10-15% from the estimate, and TTS pronunciation is not guaranteed. The Vietnamese preset voices have licence questions
 noted in [LICENSES.md](LICENSES.md).
+
+## Licence
+
+The code is MIT-licensed ([LICENSE](LICENSE)). The WhyLoop name, the mascot and `assets/brand/` are not, and Remotion has its
+own terms for larger companies: see [LICENSES.md](LICENSES.md).
 
 ## Credits
 

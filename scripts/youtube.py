@@ -92,7 +92,7 @@ def build_request(d, ep, privacy=None, publish_at=None):
             problems.append(f"không thấy {key}: {f}")
     if ep.get("render", {}).get("stale"):
         problems.append("video đã lỗi thời so với kịch bản (render.stale): hãy dựng lại")
-    priv = privacy or m.get("privacy", "private")
+    priv = privacy or m.get("privacy", "public")
     body = {
         "snippet": {"title": m["title"], "description": desc, "tags": tags, "categoryId": str(m.get("category_id", "27")),
                     "defaultLanguage": m.get("language", "vi"), "defaultAudioLanguage": m.get("language", "vi")},

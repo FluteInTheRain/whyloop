@@ -69,7 +69,7 @@ do not leave generators in a temp folder.
 
 ## Publishing to YouTube
 `./make-video youtube upload <episode>` (see README 8c). Never upload without the user's explicit go-ahead and the title chosen;
-the series playlist is a single one, set `"playlist": "PLQl0hqo1kejQ"` (the ID, not a title) in every `youtube.json`; always `--dry-run` first; default privacy is private; never commit or print the OAuth client secret/token
+the series playlist is a single one, set `"playlist": "PLQl0hqo1kejQ"` (the ID, not a title) in every `youtube.json`; always `--dry-run` first; default privacy is **public** (the user's rule from episode 15 on; set `"privacy": "public"` in every new `youtube.json`; episodes 15-16 were uploaded private before this rule); never commit or print the OAuth client secret/token
 (`~/.config/whyloop/`). After a successful public upload run `./make-video catalog`.
 
 ## Video description format (the user's final version; keep it for every episode)

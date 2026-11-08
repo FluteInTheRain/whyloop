@@ -5,5 +5,9 @@
   "RSS": "R S S",
   "logit": "low jit",
   "IRLS": "I R L S",
-  "softmax": "soft max"
+  "softmax": "soft max",
+  "LDA": "L D A",
+  "QDA": "Q D A",
+  "ROC": "R O C",
+  "AUC": "A U C"
 }

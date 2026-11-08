@@ -57,5 +57,10 @@
   "collider": "cô lai đơ",
   "deviance": "đi vi ần",
   "IRLS": "<en>i a r l s</en>",
-  "Odds": "ót"
+  "Odds": "ót",
+  "LDA": "<en>l d a</en>",
+  "QDA": "<en>q d a</en>",
+  "ROC": "<en>r o c</en>",
+  "AUC": "<en>a u c</en>",
+  "Gaussian": "gau xiên"
 }
