@@ -1,0 +1,38 @@
+{
+  "logos": {
+    "name": "SVG Logos",
+    "license": "CC0",
+    "license_url": "https://raw.githubusercontent.com/gilbarbara/logos/master/LICENSE.txt",
+    "author": "Gil Barbara",
+    "url": "https://github.com/gilbarbara/logos",
+    "tile": true,
+    "count": 149
+  },
+  "flat-color-icons": {
+    "name": "Flat Color Icons",
+    "license": "MIT",
+    "license_url": null,
+    "author": "Icons8",
+    "url": "https://github.com/icons8/flat-Color-icons",
+    "tile": false,
+    "count": 329
+  },
+  "fluent-color": {
+    "name": "Fluent UI System Color Icons",
+    "license": "MIT",
+    "license_url": "https://github.com/microsoft/fluentui-system-icons/blob/main/LICENSE",
+    "author": "Microsoft Corporation",
+    "url": "https://github.com/microsoft/fluentui-system-icons",
+    "tile": false,
+    "count": 95
+  },
+  "fluent-emoji-flat": {
+    "name": "Fluent Emoji Flat",
+    "license": "MIT",
+    "license_url": "https://github.com/microsoft/fluentui-emoji/blob/main/LICENSE",
+    "author": "Microsoft Corporation",
+    "url": "https://github.com/microsoft/fluentui-emoji",
+    "tile": false,
+    "count": 179
+  }
+}

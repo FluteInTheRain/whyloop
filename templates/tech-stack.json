@@ -1,0 +1,265 @@
+{
+  "title": "TÊN VIDEO",
+  "meta": {
+    "topic": "CHỦ ĐỀ",
+    "target_seconds": 20,
+    "subtitles": false,
+    "question": "Câu hỏi mở để người xem tự suy nghĩ (≤ 14 từ)?"
+  },
+  "scenes": [
+    {
+      "id": "story",
+      "kind": "diagram",
+      "visual_note": "Ba nhóm công nghệ, mỗi nhóm bốn logo màu gốc (tự đặt nền sáng) trong khung nét đứt.",
+      "props": {
+        "nodes": [
+          {
+            "id": "bit",
+            "type": "mascot",
+            "col": 1,
+            "row": 5,
+            "size": 150,
+            "expr": "idle",
+            "look": "right"
+          },
+          {
+            "id": "g1",
+            "type": "group",
+            "label": "Ngôn ngữ",
+            "col": 2.0,
+            "row": 2.6,
+            "w": 480,
+            "h": 640
+          },
+          {
+            "id": "g1_0",
+            "type": "icon",
+            "icon": "img:logos/python",
+            "label": "python",
+            "col": 1.58,
+            "row": 1.9,
+            "size": 110
+          },
+          {
+            "id": "g1_1",
+            "type": "icon",
+            "icon": "img:logos/javascript",
+            "label": "javascript",
+            "col": 2.42,
+            "row": 1.9,
+            "size": 110
+          },
+          {
+            "id": "g1_2",
+            "type": "icon",
+            "icon": "img:logos/go",
+            "label": "go",
+            "col": 1.58,
+            "row": 3.3,
+            "size": 110
+          },
+          {
+            "id": "g1_3",
+            "type": "icon",
+            "icon": "img:logos/rust",
+            "label": "rust",
+            "col": 2.42,
+            "row": 3.3,
+            "size": 110
+          },
+          {
+            "id": "g2",
+            "type": "group",
+            "label": "Dữ liệu",
+            "col": 4.0,
+            "row": 2.6,
+            "w": 480,
+            "h": 640
+          },
+          {
+            "id": "g2_0",
+            "type": "icon",
+            "icon": "img:logos/postgresql",
+            "label": "postgresql",
+            "col": 3.58,
+            "row": 1.9,
+            "size": 110
+          },
+          {
+            "id": "g2_1",
+            "type": "icon",
+            "icon": "img:logos/redis",
+            "label": "redis",
+            "col": 4.42,
+            "row": 1.9,
+            "size": 110
+          },
+          {
+            "id": "g2_2",
+            "type": "icon",
+            "icon": "img:logos/mongodb-icon",
+            "label": "mongodb",
+            "col": 3.58,
+            "row": 3.3,
+            "size": 110
+          },
+          {
+            "id": "g2_3",
+            "type": "icon",
+            "icon": "img:logos/elasticsearch",
+            "label": "elasticsearch",
+            "col": 4.42,
+            "row": 3.3,
+            "size": 110
+          },
+          {
+            "id": "g3",
+            "type": "group",
+            "label": "Hạ tầng",
+            "col": 6.0,
+            "row": 2.6,
+            "w": 480,
+            "h": 640
+          },
+          {
+            "id": "g3_0",
+            "type": "icon",
+            "icon": "img:logos/docker-icon",
+            "label": "docker",
+            "col": 5.58,
+            "row": 1.9,
+            "size": 110
+          },
+          {
+            "id": "g3_1",
+            "type": "icon",
+            "icon": "img:logos/kubernetes",
+            "label": "kubernetes",
+            "col": 6.42,
+            "row": 1.9,
+            "size": 110
+          },
+          {
+            "id": "g3_2",
+            "type": "icon",
+            "icon": "img:logos/aws",
+            "label": "aws",
+            "col": 5.58,
+            "row": 3.3,
+            "size": 110
+          },
+          {
+            "id": "g3_3",
+            "type": "icon",
+            "icon": "img:logos/google-cloud",
+            "label": "google-cloud",
+            "col": 6.42,
+            "row": 3.3,
+            "size": 110
+          },
+          {
+            "id": "sum_t",
+            "type": "text",
+            "label": "Ý chính của video",
+            "col": 4,
+            "row": 2.5,
+            "size": 64,
+            "color": "accent"
+          },
+          {
+            "id": "qn_t",
+            "type": "text",
+            "label": "Câu hỏi để bạn nghĩ tiếp",
+            "col": 4,
+            "row": 2.5,
+            "size": 64,
+            "color": "purple"
+          }
+        ],
+        "edges": [],
+        "beats": [
+          {
+            "text": "Nhóm ngôn ngữ gồm bốn công cụ phổ biến.",
+            "do": {
+              "show": [
+                "bit",
+                "g1",
+                "g1_0",
+                "g1_1",
+                "g1_2",
+                "g1_3"
+              ],
+              "highlight": [
+                "g1"
+              ]
+            }
+          },
+          {
+            "text": "Nhóm dữ liệu gồm bốn công cụ phổ biến.",
+            "do": {
+              "show": [
+                "g2",
+                "g2_0",
+                "g2_1",
+                "g2_2",
+                "g2_3"
+              ],
+              "highlight": [
+                "g2"
+              ]
+            }
+          },
+          {
+            "text": "Nhóm hạ tầng gồm bốn công cụ phổ biến.",
+            "do": {
+              "show": [
+                "g3",
+                "g3_0",
+                "g3_1",
+                "g3_2",
+                "g3_3"
+              ],
+              "highlight": [
+                "g3"
+              ]
+            }
+          },
+          {
+            "text": "Tóm lại, nêu ba ý chính vừa học, mỗi ý một câu ngắn gọn.",
+            "role": "summary",
+            "do": {
+              "clear": true,
+              "show": [
+                "sum_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "happy",
+                  "label": "Tóm lại"
+                }
+              }
+            }
+          },
+          {
+            "text": "Câu hỏi mở để bạn suy nghĩ, gợi sang nội dung của video tiếp theo.",
+            "role": "question",
+            "do": {
+              "hide": [
+                "sum_t"
+              ],
+              "show": [
+                "qn_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "think",
+                  "label": "Hmm?"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

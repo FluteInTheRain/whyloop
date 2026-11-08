@@ -1,0 +1,9 @@
+{
+  "_help": "Pronunciation fixes for the English voice (Kokoro). Whole-word, case-sensitive: term -> how to spell it for the TTS. Same rules as pronunciation.json.",
+  "MSE": "M S E",
+  "KNN": "K N N",
+  "RSS": "R S S",
+  "logit": "low jit",
+  "IRLS": "I R L S",
+  "softmax": "soft max"
+}

@@ -1,0 +1,226 @@
+{
+  "title": "TÊN VIDEO",
+  "meta": {
+    "topic": "CHỦ ĐỀ",
+    "target_seconds": 20,
+    "subtitles": false,
+    "question": "Câu hỏi mở để người xem tự suy nghĩ (≤ 14 từ)?"
+  },
+  "scenes": [
+    {
+      "id": "story",
+      "kind": "diagram",
+      "visual_note": "Bốn bước nối thành vòng tròn (hỏi, quan sát, kết luận, thử nghiệm); gói tin chạy quanh vòng.",
+      "props": {
+        "nodes": [
+          {
+            "id": "bit",
+            "type": "mascot",
+            "col": 1,
+            "row": 5,
+            "size": 150,
+            "expr": "idle",
+            "look": "right"
+          },
+          {
+            "id": "mid",
+            "type": "text",
+            "label": "Vòng lặp",
+            "col": 4,
+            "row": 3,
+            "size": 56,
+            "color": "accent"
+          },
+          {
+            "id": "a",
+            "type": "icon",
+            "icon": "img:fluent-emoji-flat/thinking-face",
+            "label": "Đặt câu hỏi",
+            "col": 4,
+            "row": 1.5
+          },
+          {
+            "id": "b",
+            "type": "icon",
+            "icon": "img:fluent-emoji-flat/magnifying-glass-tilted-left",
+            "label": "Quan sát",
+            "col": 5.7,
+            "row": 3
+          },
+          {
+            "id": "c",
+            "type": "icon",
+            "icon": "img:fluent-emoji-flat/light-bulb",
+            "label": "Rút ra kết luận",
+            "col": 4,
+            "row": 4.5
+          },
+          {
+            "id": "d",
+            "type": "icon",
+            "icon": "img:fluent-emoji-flat/test-tube",
+            "label": "Thử nghiệm",
+            "col": 2.3,
+            "row": 3
+          },
+          {
+            "id": "sum_t",
+            "type": "text",
+            "label": "Ý chính của video",
+            "col": 4,
+            "row": 2.5,
+            "size": 64,
+            "color": "accent"
+          },
+          {
+            "id": "qn_t",
+            "type": "text",
+            "label": "Câu hỏi để bạn nghĩ tiếp",
+            "col": 4,
+            "row": 2.5,
+            "size": 64,
+            "color": "purple"
+          }
+        ],
+        "edges": [
+          {
+            "id": "e1",
+            "from": "a",
+            "to": "b",
+            "bend": 70
+          },
+          {
+            "id": "e2",
+            "from": "b",
+            "to": "c",
+            "bend": 70
+          },
+          {
+            "id": "e3",
+            "from": "c",
+            "to": "d",
+            "bend": 70
+          },
+          {
+            "id": "e4",
+            "from": "d",
+            "to": "a",
+            "bend": 70
+          }
+        ],
+        "beats": [
+          {
+            "text": "Mọi hiểu biết bắt đầu từ một câu hỏi.",
+            "do": {
+              "show": [
+                "bit",
+                "mid",
+                "a"
+              ],
+              "highlight": [
+                "a"
+              ]
+            }
+          },
+          {
+            "text": "Ta quan sát để tìm manh mối.",
+            "do": {
+              "show": [
+                "b",
+                "e1"
+              ],
+              "flow": [
+                "e1"
+              ]
+            }
+          },
+          {
+            "text": "Rút ra một kết luận tạm thời.",
+            "do": {
+              "show": [
+                "c",
+                "e2"
+              ],
+              "flow": [
+                "e2"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "aha",
+                  "point": "eureka",
+                  "label": "À ra thế!"
+                }
+              }
+            }
+          },
+          {
+            "text": "Rồi thử nghiệm xem nó có đúng không.",
+            "do": {
+              "show": [
+                "d",
+                "e3"
+              ],
+              "flow": [
+                "e3"
+              ]
+            }
+          },
+          {
+            "text": "Kết quả lại mở ra câu hỏi mới, và vòng lặp tiếp tục.",
+            "do": {
+              "show": [
+                "e4"
+              ],
+              "flow": [
+                "e4",
+                "e1",
+                "e2",
+                "e3"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "happy",
+                  "label": ""
+                }
+              }
+            }
+          },
+          {
+            "text": "Tóm lại, nêu ba ý chính vừa học, mỗi ý một câu ngắn gọn.",
+            "role": "summary",
+            "do": {
+              "clear": true,
+              "show": [
+                "sum_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "happy",
+                  "label": "Tóm lại"
+                }
+              }
+            }
+          },
+          {
+            "text": "Câu hỏi mở để bạn suy nghĩ, gợi sang nội dung của video tiếp theo.",
+            "role": "question",
+            "do": {
+              "hide": [
+                "sum_t"
+              ],
+              "show": [
+                "qn_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "think",
+                  "label": "Hmm?"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

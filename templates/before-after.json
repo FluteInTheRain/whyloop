@@ -1,0 +1,232 @@
+{
+  "title": "TÊN VIDEO",
+  "meta": {
+    "topic": "CHỦ ĐỀ",
+    "target_seconds": 40,
+    "subtitles": false,
+    "question": "Câu hỏi mở để người xem tự suy nghĩ (≤ 14 từ)?"
+  },
+  "scenes": [
+    {
+      "id": "story",
+      "kind": "diagram",
+      "visual_note": "Cách cũ chậm (đỏ) → cách mới nhanh (xanh) → kết quả.",
+      "props": {
+        "nodes": [
+          {
+            "id": "bit",
+            "type": "mascot",
+            "col": 1,
+            "row": 5,
+            "size": 150,
+            "expr": "idle",
+            "look": "right"
+          },
+          {
+            "id": "src",
+            "type": "box",
+            "label": "Nguồn",
+            "col": 2,
+            "row": 3,
+            "w": 250,
+            "h": 110
+          },
+          {
+            "id": "t1",
+            "type": "icon",
+            "icon": "server",
+            "label": "Dịch vụ A",
+            "col": 6,
+            "row": 1.45
+          },
+          {
+            "id": "t2",
+            "type": "icon",
+            "icon": "server",
+            "label": "Dịch vụ B",
+            "col": 6,
+            "row": 3
+          },
+          {
+            "id": "t3",
+            "type": "icon",
+            "icon": "server",
+            "label": "Dịch vụ C",
+            "col": 6,
+            "row": 4.55
+          },
+          {
+            "id": "bad",
+            "type": "text",
+            "label": "Cách cũ: chậm",
+            "col": 4,
+            "row": 4.8,
+            "size": 54,
+            "color": "red"
+          },
+          {
+            "id": "good",
+            "type": "text",
+            "label": "Cách mới: nhanh",
+            "col": 4,
+            "row": 4.8,
+            "size": 60,
+            "color": "green"
+          },
+          {
+            "id": "sum_t",
+            "type": "text",
+            "label": "Tóm lại: 3 ý chính",
+            "col": 4,
+            "row": 2,
+            "size": 72,
+            "color": "primary"
+          },
+          {
+            "id": "qn_t",
+            "type": "text",
+            "label": "Câu hỏi cho bạn?",
+            "col": 4,
+            "row": 3,
+            "size": 84,
+            "color": "accent"
+          }
+        ],
+        "edges": [
+          {
+            "id": "e1",
+            "from": "src",
+            "to": "t1"
+          },
+          {
+            "id": "e2",
+            "from": "src",
+            "to": "t2"
+          },
+          {
+            "id": "e3",
+            "from": "src",
+            "to": "t3"
+          }
+        ],
+        "beats": [
+          {
+            "text": "Bối cảnh: nêu bài toán cụ thể.",
+            "do": {
+              "show": [
+                "bit",
+                "src",
+                "t1",
+                "t2",
+                "t3",
+                "e1",
+                "e2",
+                "e3"
+              ]
+            }
+          },
+          {
+            "text": "Cách làm thông thường và vì sao chậm.",
+            "do": {
+              "highlight": [
+                "t1"
+              ],
+              "flow": [
+                "e1"
+              ],
+              "show": [
+                "bad"
+              ],
+              "set": {
+                "e1": {
+                  "color": "red"
+                },
+                "e2": {
+                  "color": "red"
+                },
+                "e3": {
+                  "color": "red"
+                },
+                "bit": {
+                  "expr": "oops",
+                  "label": "Chậm quá!"
+                }
+              }
+            }
+          },
+          {
+            "text": "Ý tưởng mới giải quyết thế nào.",
+            "do": {
+              "hide": [
+                "bad"
+              ],
+              "highlight": [],
+              "show": [
+                "good"
+              ],
+              "set": {
+                "e1": {
+                  "color": "primary"
+                },
+                "e2": {
+                  "color": "primary"
+                },
+                "e3": {
+                  "color": "primary"
+                },
+                "bit": {
+                  "expr": "happy",
+                  "label": "Nhanh!"
+                }
+              },
+              "flow": [
+                "e1",
+                "e2",
+                "e3"
+              ],
+              "camera": {
+                "x": 1040,
+                "y": 540,
+                "zoom": 1.15
+              }
+            }
+          },
+          {
+            "text": "Tóm lại, nêu ba ý chính vừa học, mỗi ý một câu ngắn gọn.",
+            "role": "summary",
+            "do": {
+              "clear": true,
+              "show": [
+                "sum_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "happy",
+                  "label": "Tóm lại"
+                }
+              }
+            }
+          },
+          {
+            "text": "Câu hỏi mở để bạn suy nghĩ, gợi sang nội dung của video tiếp theo.",
+            "role": "question",
+            "do": {
+              "hide": [
+                "sum_t"
+              ],
+              "show": [
+                "qn_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "think",
+                  "label": "Hmm?"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,271 @@
+{
+  "title": "TÊN VIDEO",
+  "meta": {
+    "topic": "CHỦ ĐỀ",
+    "target_seconds": 20,
+    "subtitles": false,
+    "question": "Câu hỏi mở để người xem tự suy nghĩ (≤ 14 từ)?"
+  },
+  "scenes": [
+    {
+      "id": "story",
+      "kind": "diagram",
+      "visual_note": "Biểu đồ điểm → đường mô hình → đoạn sai số, kèm công thức KaTeX; dùng cho hồi quy, hàm mất mát.",
+      "props": {
+        "nodes": [
+          {
+            "id": "bit",
+            "type": "mascot",
+            "col": 1,
+            "row": 5,
+            "size": 150,
+            "expr": "idle",
+            "look": "right"
+          },
+          {
+            "id": "eq",
+            "type": "equation",
+            "tex": "\\hat{y} = w\\,x + b",
+            "col": 2.3,
+            "row": 1.8,
+            "size": 68,
+            "color": "accent"
+          },
+          {
+            "id": "loss",
+            "type": "equation",
+            "tex": "L = \\frac{1}{n}\\sum_{i=1}^{n}(y_i-\\hat{y}_i)^2",
+            "col": 2.3,
+            "row": 3.2,
+            "size": 54,
+            "color": "purple",
+            "w": 700,
+            "h": 160
+          },
+          {
+            "id": "pl",
+            "type": "plot",
+            "col": 5.3,
+            "row": 2.8,
+            "w": 820,
+            "h": 560,
+            "xrange": [
+              0,
+              8
+            ],
+            "yrange": [
+              0,
+              12
+            ],
+            "xlabel": "Đầu vào x",
+            "ylabel": "Kết quả y",
+            "step": 1,
+            "series": [
+              {
+                "type": "points",
+                "data": [
+                  [
+                    1,
+                    2.2
+                  ],
+                  [
+                    2,
+                    3.1
+                  ],
+                  [
+                    3,
+                    4.9
+                  ],
+                  [
+                    4,
+                    5.2
+                  ],
+                  [
+                    5,
+                    7.4
+                  ],
+                  [
+                    6,
+                    7.9
+                  ],
+                  [
+                    7,
+                    9.6
+                  ]
+                ],
+                "label": "Dữ liệu"
+              },
+              {
+                "type": "fn",
+                "fn": "1.2+1.2*x",
+                "color": "green",
+                "label": "Mô hình"
+              },
+              {
+                "type": "segments",
+                "data": [
+                  [
+                    1,
+                    2.2,
+                    1,
+                    2.4
+                  ],
+                  [
+                    2,
+                    3.1,
+                    2,
+                    3.5999999999999996
+                  ],
+                  [
+                    3,
+                    4.9,
+                    3,
+                    4.8
+                  ],
+                  [
+                    4,
+                    5.2,
+                    4,
+                    6.0
+                  ],
+                  [
+                    5,
+                    7.4,
+                    5,
+                    7.2
+                  ],
+                  [
+                    6,
+                    7.9,
+                    6,
+                    8.399999999999999
+                  ],
+                  [
+                    7,
+                    9.6,
+                    7,
+                    9.6
+                  ]
+                ],
+                "color": "red",
+                "label": "Sai số"
+              }
+            ]
+          },
+          {
+            "id": "sum_t",
+            "type": "text",
+            "label": "Ý chính của video",
+            "col": 4,
+            "row": 2.5,
+            "size": 64,
+            "color": "accent"
+          },
+          {
+            "id": "qn_t",
+            "type": "text",
+            "label": "Câu hỏi để bạn nghĩ tiếp",
+            "col": 4,
+            "row": 2.5,
+            "size": 64,
+            "color": "purple"
+          }
+        ],
+        "edges": [],
+        "beats": [
+          {
+            "text": "Đây là dữ liệu: mỗi chấm là một quan sát.",
+            "do": {
+              "show": [
+                "bit",
+                "pl"
+              ]
+            }
+          },
+          {
+            "text": "Ta tìm một đường thẳng mô tả xu hướng của chúng.",
+            "do": {
+              "show": [
+                "eq"
+              ],
+              "set": {
+                "pl": {
+                  "step": 2
+                }
+              },
+              "highlight": [
+                "eq"
+              ]
+            }
+          },
+          {
+            "text": "Mỗi chấm lệch khỏi đường một đoạn, gọi là sai số.",
+            "do": {
+              "set": {
+                "pl": {
+                  "step": 3
+                },
+                "bit": {
+                  "expr": "think",
+                  "label": "Lệch bao nhiêu?"
+                }
+              },
+              "highlight": []
+            }
+          },
+          {
+            "text": "Gom các sai số lại thành một con số để so sánh.",
+            "do": {
+              "show": [
+                "loss"
+              ],
+              "highlight": [
+                "loss"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "aha",
+                  "label": "À ra thế!"
+                }
+              }
+            }
+          },
+          {
+            "text": "Tóm lại, nêu ba ý chính vừa học, mỗi ý một câu ngắn gọn.",
+            "role": "summary",
+            "do": {
+              "clear": true,
+              "show": [
+                "sum_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "happy",
+                  "label": "Tóm lại"
+                }
+              }
+            }
+          },
+          {
+            "text": "Câu hỏi mở để bạn suy nghĩ, gợi sang nội dung của video tiếp theo.",
+            "role": "question",
+            "do": {
+              "hide": [
+                "sum_t"
+              ],
+              "show": [
+                "qn_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "think",
+                  "label": "Hmm?"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

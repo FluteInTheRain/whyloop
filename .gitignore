@@ -1,0 +1,28 @@
+# --- dependencies / third-party clones (reinstall with scripts/setup.sh) ---
+node_modules/
+tools/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# --- generated output ---
+out/
+props/
+public/audio/
+public/brand/
+public/sfx/
+public/lib/
+assets/brand/build/
+assets/music/*.wav
+
+# --- personal voice samples (re-record / re-register with ./make-video voice add) ---
+assets/voices/*.wav
+assets/voices/*.json
+
+# --- reference books: keep extracted text/figures/metadata, not the original file ---
+books/*/source/
+
+# Google OAuth secrets must never be committed (the real ones live in ~/.config/whyloop/)
+*client_secret*.json
+youtube_token*.json

@@ -1,0 +1,235 @@
+{
+  "title": "TÊN VIDEO",
+  "meta": {
+    "topic": "CHỦ ĐỀ",
+    "target_seconds": 20,
+    "subtitles": false,
+    "question": "Câu hỏi mở để người xem tự suy nghĩ (≤ 14 từ)?"
+  },
+  "scenes": [
+    {
+      "id": "story",
+      "kind": "diagram",
+      "visual_note": "Bốn tầng xếp chồng, mỗi tầng một màu và một icon màu gốc, mũi tên đi xuống.",
+      "props": {
+        "nodes": [
+          {
+            "id": "bit",
+            "type": "mascot",
+            "col": 7,
+            "row": 5,
+            "size": 150,
+            "expr": "idle",
+            "look": "right",
+            "side": "left"
+          },
+          {
+            "id": "i1",
+            "type": "icon",
+            "icon": "img:fluent-color/laptop",
+            "label": "",
+            "col": 2.2,
+            "row": 1.1,
+            "size": 96
+          },
+          {
+            "id": "l1",
+            "type": "box",
+            "label": "Giao diện",
+            "col": 4.6,
+            "row": 1.1,
+            "w": 760,
+            "h": 96,
+            "color": "blue"
+          },
+          {
+            "id": "i2",
+            "type": "icon",
+            "icon": "img:fluent-color/code-block",
+            "label": "",
+            "col": 2.2,
+            "row": 2.05,
+            "size": 96
+          },
+          {
+            "id": "l2",
+            "type": "box",
+            "label": "API",
+            "col": 4.6,
+            "row": 2.05,
+            "w": 760,
+            "h": 96,
+            "color": "green"
+          },
+          {
+            "id": "i3",
+            "type": "icon",
+            "icon": "img:fluent-color/settings",
+            "label": "",
+            "col": 2.2,
+            "row": 3.0,
+            "size": 96
+          },
+          {
+            "id": "l3",
+            "type": "box",
+            "label": "Nghiệp vụ",
+            "col": 4.6,
+            "row": 3.0,
+            "w": 760,
+            "h": 96,
+            "color": "purple"
+          },
+          {
+            "id": "i4",
+            "type": "icon",
+            "icon": "img:fluent-color/database",
+            "label": "",
+            "col": 2.2,
+            "row": 3.95,
+            "size": 96
+          },
+          {
+            "id": "l4",
+            "type": "box",
+            "label": "Dữ liệu",
+            "col": 4.6,
+            "row": 3.95,
+            "w": 760,
+            "h": 96,
+            "color": "orange"
+          },
+          {
+            "id": "sum_t",
+            "type": "text",
+            "label": "Ý chính của video",
+            "col": 4,
+            "row": 2.5,
+            "size": 64,
+            "color": "accent"
+          },
+          {
+            "id": "qn_t",
+            "type": "text",
+            "label": "Câu hỏi để bạn nghĩ tiếp",
+            "col": 4,
+            "row": 2.5,
+            "size": 64,
+            "color": "purple"
+          }
+        ],
+        "edges": [
+          {
+            "id": "e2",
+            "from": "l1",
+            "to": "l2"
+          },
+          {
+            "id": "e3",
+            "from": "l2",
+            "to": "l3"
+          },
+          {
+            "id": "e4",
+            "from": "l3",
+            "to": "l4"
+          }
+        ],
+        "beats": [
+          {
+            "text": "Phần mềm lớn thường chia thành các tầng chồng lên nhau.",
+            "do": {
+              "show": [
+                "bit",
+                "i1",
+                "l1"
+              ]
+            }
+          },
+          {
+            "text": "Tầng api làm đúng một nhiệm vụ của nó.",
+            "do": {
+              "show": [
+                "i2",
+                "l2",
+                "e2"
+              ],
+              "flow": [
+                "e2"
+              ],
+              "highlight": [
+                "l2"
+              ]
+            }
+          },
+          {
+            "text": "Tầng nghiệp vụ làm đúng một nhiệm vụ của nó.",
+            "do": {
+              "show": [
+                "i3",
+                "l3",
+                "e3"
+              ],
+              "flow": [
+                "e3"
+              ],
+              "highlight": [
+                "l3"
+              ]
+            }
+          },
+          {
+            "text": "Tầng dữ liệu làm đúng một nhiệm vụ của nó.",
+            "do": {
+              "show": [
+                "i4",
+                "l4",
+                "e4"
+              ],
+              "flow": [
+                "e4"
+              ],
+              "highlight": [
+                "l4"
+              ]
+            }
+          },
+          {
+            "text": "Tóm lại, nêu ba ý chính vừa học, mỗi ý một câu ngắn gọn.",
+            "role": "summary",
+            "do": {
+              "clear": true,
+              "show": [
+                "sum_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "happy",
+                  "label": "Tóm lại"
+                }
+              }
+            }
+          },
+          {
+            "text": "Câu hỏi mở để bạn suy nghĩ, gợi sang nội dung của video tiếp theo.",
+            "role": "question",
+            "do": {
+              "hide": [
+                "sum_t"
+              ],
+              "show": [
+                "qn_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "think",
+                  "label": "Hmm?"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

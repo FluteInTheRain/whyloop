@@ -1,0 +1,226 @@
+{
+  "title": "TÊN VIDEO",
+  "meta": {
+    "topic": "CHỦ ĐỀ",
+    "target_seconds": 40,
+    "subtitles": false,
+    "question": "Câu hỏi mở để người xem tự suy nghĩ (≤ 14 từ)?"
+  },
+  "scenes": [
+    {
+      "id": "story",
+      "kind": "diagram",
+      "visual_note": "Chuỗi 5 bước nối nhau, sáng lên và có gói tin chạy theo lời kể.",
+      "props": {
+        "nodes": [
+          {
+            "id": "bit",
+            "type": "mascot",
+            "col": 1,
+            "row": 5,
+            "size": 150,
+            "expr": "idle",
+            "look": "right"
+          },
+          {
+            "id": "n1",
+            "type": "icon",
+            "icon": "user",
+            "label": "Người dùng",
+            "col": 1.5,
+            "row": 2.5
+          },
+          {
+            "id": "n2",
+            "type": "icon",
+            "icon": "browser",
+            "label": "Ứng dụng",
+            "col": 2.8,
+            "row": 2.5
+          },
+          {
+            "id": "n3",
+            "type": "icon",
+            "icon": "balance",
+            "label": "Cân bằng tải",
+            "col": 4.1,
+            "row": 2.5
+          },
+          {
+            "id": "n4",
+            "type": "icon",
+            "icon": "server",
+            "label": "Máy chủ",
+            "col": 5.4,
+            "row": 2.5
+          },
+          {
+            "id": "n5",
+            "type": "icon",
+            "icon": "db",
+            "label": "Cơ sở dữ liệu",
+            "col": 6.7,
+            "row": 2.5
+          },
+          {
+            "id": "cap",
+            "type": "text",
+            "label": "Một vòng yêu cầu – phản hồi",
+            "col": 4,
+            "row": 4,
+            "size": 48,
+            "color": "muted"
+          },
+          {
+            "id": "sum_t",
+            "type": "text",
+            "label": "Tóm lại: 3 ý chính",
+            "col": 4,
+            "row": 2,
+            "size": 72,
+            "color": "primary"
+          },
+          {
+            "id": "qn_t",
+            "type": "text",
+            "label": "Câu hỏi cho bạn?",
+            "col": 4,
+            "row": 3,
+            "size": 84,
+            "color": "accent"
+          }
+        ],
+        "edges": [
+          {
+            "id": "a",
+            "from": "n1",
+            "to": "n2"
+          },
+          {
+            "id": "b",
+            "from": "n2",
+            "to": "n3"
+          },
+          {
+            "id": "c",
+            "from": "n3",
+            "to": "n4"
+          },
+          {
+            "id": "d",
+            "from": "n4",
+            "to": "n5"
+          }
+        ],
+        "beats": [
+          {
+            "text": "Giới thiệu điểm xuất phát.",
+            "do": {
+              "show": [
+                "bit",
+                "n1",
+                "n2",
+                "a"
+              ]
+            }
+          },
+          {
+            "text": "Yêu cầu đi qua tầng tiếp theo.",
+            "do": {
+              "show": [
+                "n3",
+                "b"
+              ],
+              "flow": [
+                "a",
+                "b"
+              ],
+              "highlight": [
+                "n3"
+              ]
+            }
+          },
+          {
+            "text": "Đến máy chủ và cơ sở dữ liệu.",
+            "do": {
+              "show": [
+                "n4",
+                "n5",
+                "c",
+                "d"
+              ],
+              "flow": [
+                "c",
+                "d"
+              ],
+              "highlight": [
+                "n5"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "wow",
+                  "label": "Gọn!"
+                }
+              }
+            }
+          },
+          {
+            "text": "Tóm tắt toàn bộ luồng.",
+            "do": {
+              "highlight": [],
+              "show": [
+                "cap"
+              ],
+              "flow": [
+                "a",
+                "b",
+                "c",
+                "d"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "happy",
+                  "label": ""
+                }
+              }
+            }
+          },
+          {
+            "text": "Tóm lại, nêu ba ý chính vừa học, mỗi ý một câu ngắn gọn.",
+            "role": "summary",
+            "do": {
+              "clear": true,
+              "show": [
+                "sum_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "happy",
+                  "label": "Tóm lại"
+                }
+              }
+            }
+          },
+          {
+            "text": "Câu hỏi mở để bạn suy nghĩ, gợi sang nội dung của video tiếp theo.",
+            "role": "question",
+            "do": {
+              "hide": [
+                "sum_t"
+              ],
+              "show": [
+                "qn_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "think",
+                  "label": "Hmm?"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

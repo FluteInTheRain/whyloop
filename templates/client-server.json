@@ -1,0 +1,242 @@
+{
+  "title": "TÊN VIDEO",
+  "meta": {
+    "topic": "CHỦ ĐỀ",
+    "target_seconds": 20,
+    "subtitles": false,
+    "question": "Câu hỏi mở để người xem tự suy nghĩ (≤ 14 từ)?"
+  },
+  "scenes": [
+    {
+      "id": "story",
+      "kind": "diagram",
+      "visual_note": "Yêu cầu đi từ trình duyệt qua internet, cân bằng tải, máy chủ, rồi tới cơ sở dữ liệu; icon màu gốc.",
+      "props": {
+        "nodes": [
+          {
+            "id": "bit",
+            "type": "mascot",
+            "col": 1,
+            "row": 5,
+            "size": 150,
+            "expr": "idle",
+            "look": "right"
+          },
+          {
+            "id": "cl",
+            "type": "icon",
+            "icon": "img:fluent-color/laptop",
+            "label": "Trình duyệt",
+            "col": 1.4,
+            "row": 2.6
+          },
+          {
+            "id": "net",
+            "type": "icon",
+            "icon": "img:fluent-color/cloud",
+            "label": "Internet",
+            "col": 2.8,
+            "row": 2.6
+          },
+          {
+            "id": "dc",
+            "type": "group",
+            "label": "Trung tâm dữ liệu",
+            "col": 5.35,
+            "row": 2.6,
+            "w": 1010,
+            "h": 640
+          },
+          {
+            "id": "lb",
+            "type": "icon",
+            "icon": "img:fluent-emoji-flat/balance-scale",
+            "label": "Cân bằng tải",
+            "col": 4.15,
+            "row": 2.6
+          },
+          {
+            "id": "s1",
+            "type": "icon",
+            "icon": "img:flat-color-icons/database",
+            "label": "Máy chủ A",
+            "col": 5.55,
+            "row": 1.75,
+            "size": 110
+          },
+          {
+            "id": "s2",
+            "type": "icon",
+            "icon": "img:flat-color-icons/database",
+            "label": "Máy chủ B",
+            "col": 5.55,
+            "row": 3.45,
+            "size": 110
+          },
+          {
+            "id": "db",
+            "type": "icon",
+            "icon": "img:fluent-color/database",
+            "label": "Cơ sở dữ liệu",
+            "col": 6.7,
+            "row": 2.6
+          },
+          {
+            "id": "sum_t",
+            "type": "text",
+            "label": "Ý chính của video",
+            "col": 4,
+            "row": 2.5,
+            "size": 64,
+            "color": "accent"
+          },
+          {
+            "id": "qn_t",
+            "type": "text",
+            "label": "Câu hỏi để bạn nghĩ tiếp",
+            "col": 4,
+            "row": 2.5,
+            "size": 64,
+            "color": "purple"
+          }
+        ],
+        "edges": [
+          {
+            "id": "e1",
+            "from": "cl",
+            "to": "net"
+          },
+          {
+            "id": "e2",
+            "from": "net",
+            "to": "lb"
+          },
+          {
+            "id": "e3",
+            "from": "lb",
+            "to": "s1"
+          },
+          {
+            "id": "e4",
+            "from": "lb",
+            "to": "s2"
+          },
+          {
+            "id": "e5",
+            "from": "s1",
+            "to": "db"
+          },
+          {
+            "id": "e6",
+            "from": "s2",
+            "to": "db"
+          }
+        ],
+        "beats": [
+          {
+            "text": "Người dùng mở trình duyệt và gửi một yêu cầu.",
+            "do": {
+              "show": [
+                "bit",
+                "cl",
+                "net",
+                "e1"
+              ],
+              "flow": [
+                "e1"
+              ]
+            }
+          },
+          {
+            "text": "Yêu cầu đi qua internet tới trung tâm dữ liệu.",
+            "do": {
+              "show": [
+                "dc",
+                "lb",
+                "e2"
+              ],
+              "flow": [
+                "e2"
+              ],
+              "highlight": [
+                "lb"
+              ]
+            }
+          },
+          {
+            "text": "Bộ cân bằng tải chia việc cho hai máy chủ.",
+            "do": {
+              "show": [
+                "s1",
+                "s2",
+                "e3",
+                "e4"
+              ],
+              "flow": [
+                "e3",
+                "e4"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "wow",
+                  "label": "Chia đều!"
+                }
+              }
+            }
+          },
+          {
+            "text": "Cả hai cùng đọc ghi vào một cơ sở dữ liệu.",
+            "do": {
+              "show": [
+                "db",
+                "e5",
+                "e6"
+              ],
+              "flow": [
+                "e5",
+                "e6"
+              ],
+              "highlight": [
+                "db"
+              ]
+            }
+          },
+          {
+            "text": "Tóm lại, nêu ba ý chính vừa học, mỗi ý một câu ngắn gọn.",
+            "role": "summary",
+            "do": {
+              "clear": true,
+              "show": [
+                "sum_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "happy",
+                  "label": "Tóm lại"
+                }
+              }
+            }
+          },
+          {
+            "text": "Câu hỏi mở để bạn suy nghĩ, gợi sang nội dung của video tiếp theo.",
+            "role": "question",
+            "do": {
+              "hide": [
+                "sum_t"
+              ],
+              "show": [
+                "qn_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "think",
+                  "label": "Hmm?"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

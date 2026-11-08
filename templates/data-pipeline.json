@@ -1,0 +1,224 @@
+{
+  "title": "TÊN VIDEO",
+  "meta": {
+    "topic": "CHỦ ĐỀ",
+    "target_seconds": 20,
+    "subtitles": false,
+    "question": "Câu hỏi mở để người xem tự suy nghĩ (≤ 14 từ)?"
+  },
+  "scenes": [
+    {
+      "id": "story",
+      "kind": "diagram",
+      "visual_note": "Ba nguồn dữ liệu → làm sạch → kho dữ liệu → báo cáo; mọi icon giữ màu gốc.",
+      "props": {
+        "nodes": [
+          {
+            "id": "bit",
+            "type": "mascot",
+            "col": 1,
+            "row": 5,
+            "size": 150,
+            "expr": "idle",
+            "look": "right"
+          },
+          {
+            "id": "s1",
+            "type": "icon",
+            "icon": "img:fluent-emoji-flat/mobile-phone",
+            "label": "Ứng dụng",
+            "col": 1.3,
+            "row": 1.5,
+            "size": 100
+          },
+          {
+            "id": "s2",
+            "type": "icon",
+            "icon": "img:flat-color-icons/data-sheet",
+            "label": "Bảng tính",
+            "col": 1.3,
+            "row": 2.55,
+            "size": 100
+          },
+          {
+            "id": "s3",
+            "type": "icon",
+            "icon": "img:fluent-color/globe",
+            "label": "Website",
+            "col": 1.3,
+            "row": 3.6,
+            "size": 100
+          },
+          {
+            "id": "etl",
+            "type": "icon",
+            "icon": "img:flat-color-icons/automatic",
+            "label": "Làm sạch",
+            "col": 3.3,
+            "row": 2.55
+          },
+          {
+            "id": "wh",
+            "type": "icon",
+            "icon": "img:fluent-color/database",
+            "label": "Kho dữ liệu",
+            "col": 5.0,
+            "row": 2.55
+          },
+          {
+            "id": "dash",
+            "type": "icon",
+            "icon": "img:fluent-color/data-pie",
+            "label": "Báo cáo",
+            "col": 6.6,
+            "row": 2.55
+          },
+          {
+            "id": "sum_t",
+            "type": "text",
+            "label": "Ý chính của video",
+            "col": 4,
+            "row": 2.5,
+            "size": 64,
+            "color": "accent"
+          },
+          {
+            "id": "qn_t",
+            "type": "text",
+            "label": "Câu hỏi để bạn nghĩ tiếp",
+            "col": 4,
+            "row": 2.5,
+            "size": 64,
+            "color": "purple"
+          }
+        ],
+        "edges": [
+          {
+            "id": "a1",
+            "from": "s1",
+            "to": "etl"
+          },
+          {
+            "id": "a2",
+            "from": "s2",
+            "to": "etl"
+          },
+          {
+            "id": "a3",
+            "from": "s3",
+            "to": "etl"
+          },
+          {
+            "id": "b",
+            "from": "etl",
+            "to": "wh"
+          },
+          {
+            "id": "c",
+            "from": "wh",
+            "to": "dash"
+          }
+        ],
+        "beats": [
+          {
+            "text": "Dữ liệu đến từ nhiều nguồn khác nhau.",
+            "do": {
+              "show": [
+                "bit",
+                "s1",
+                "s2",
+                "s3"
+              ]
+            }
+          },
+          {
+            "text": "Chúng được gom về một bước làm sạch.",
+            "do": {
+              "show": [
+                "etl",
+                "a1",
+                "a2",
+                "a3"
+              ],
+              "flow": [
+                "a1",
+                "a2",
+                "a3"
+              ],
+              "highlight": [
+                "etl"
+              ]
+            }
+          },
+          {
+            "text": "Sau đó lưu vào kho dữ liệu chung.",
+            "do": {
+              "show": [
+                "wh",
+                "b"
+              ],
+              "flow": [
+                "b"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "wow",
+                  "label": "Gọn!"
+                }
+              }
+            }
+          },
+          {
+            "text": "Cuối cùng biến thành báo cáo để ra quyết định.",
+            "do": {
+              "show": [
+                "dash",
+                "c"
+              ],
+              "flow": [
+                "c"
+              ],
+              "highlight": [
+                "dash"
+              ]
+            }
+          },
+          {
+            "text": "Tóm lại, nêu ba ý chính vừa học, mỗi ý một câu ngắn gọn.",
+            "role": "summary",
+            "do": {
+              "clear": true,
+              "show": [
+                "sum_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "happy",
+                  "label": "Tóm lại"
+                }
+              }
+            }
+          },
+          {
+            "text": "Câu hỏi mở để bạn suy nghĩ, gợi sang nội dung của video tiếp theo.",
+            "role": "question",
+            "do": {
+              "hide": [
+                "sum_t"
+              ],
+              "show": [
+                "qn_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "think",
+                  "label": "Hmm?"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

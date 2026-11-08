@@ -1,0 +1,77 @@
+{
+  "title": "Goroutine trong Go",
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "hook",
+      "kind": "title",
+      "text": "Muốn chương trình Go làm nhiều việc cùng lúc? Hãy gặp goroutine.",
+      "props": {
+        "heading": "Goroutine",
+        "sub": "Làm nhiều việc cùng lúc trong Go"
+      },
+      "audio": "audio/00_hook.wav",
+      "durationInFrames": 150
+    },
+    {
+      "id": "lightweight",
+      "kind": "compare",
+      "text": "Goroutine là một luồng siêu nhẹ do Go runtime quản lý. Chỉ tốn khoảng hai kilobyte bộ nhớ, trong khi luồng hệ điều hành cần vài megabyte.",
+      "props": {
+        "top": {
+          "label": "Luồng hệ điều hành",
+          "value": "~ 1 MB+"
+        },
+        "bottom": {
+          "label": "Goroutine",
+          "value": "~ 2 KB"
+        }
+      },
+      "audio": "audio/01_lightweight.wav",
+      "durationInFrames": 363
+    },
+    {
+      "id": "usage",
+      "kind": "code",
+      "text": "Chỉ cần thêm từ khóa go trước lời gọi hàm, hàm đó sẽ chạy song song.",
+      "props": {
+        "lines": [
+          "func main() {",
+          "    go fetchData(\"api/users\")",
+          "    go fetchData(\"api/orders\")",
+          "    go fetchData(\"api/stats\")",
+          "}"
+        ],
+        "highlight": [
+          1,
+          2,
+          3
+        ]
+      },
+      "audio": "audio/02_usage.wav",
+      "durationInFrames": 174
+    },
+    {
+      "id": "scheduler",
+      "kind": "scheduler",
+      "text": "Hàng nghìn goroutine được bộ lập lịch phân phối lên một vài luồng hệ điều hành, nên chạy rất hiệu quả.",
+      "props": {
+        "goroutines": 12,
+        "threads": 3
+      },
+      "audio": "audio/03_scheduler.wav",
+      "durationInFrames": 231
+    },
+    {
+      "id": "outro",
+      "kind": "outro",
+      "text": "Và để các goroutine nói chuyện với nhau, hãy dùng channel.",
+      "props": {
+        "heading": "Tiếp theo: Channel",
+        "sub": "ch <- value"
+      },
+      "audio": "audio/04_outro.wav",
+      "durationInFrames": 161
+    }
+  ]
+}

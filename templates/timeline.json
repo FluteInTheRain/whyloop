@@ -1,0 +1,222 @@
+{
+  "title": "TÊN VIDEO",
+  "meta": {
+    "topic": "CHỦ ĐỀ",
+    "target_seconds": 20,
+    "subtitles": false,
+    "question": "Câu hỏi mở để người xem tự suy nghĩ (≤ 14 từ)?"
+  },
+  "scenes": [
+    {
+      "id": "story",
+      "kind": "diagram",
+      "visual_note": "Năm cột mốc trên một trục ngang; mỗi mốc một icon màu gốc, năm ở nhãn và sự kiện ở dòng phụ.",
+      "props": {
+        "nodes": [
+          {
+            "id": "bit",
+            "type": "mascot",
+            "col": 1,
+            "row": 5,
+            "size": 150,
+            "expr": "idle",
+            "look": "right"
+          },
+          {
+            "id": "m1",
+            "type": "icon",
+            "icon": "img:fluent-emoji-flat/abacus",
+            "label": "1940s",
+            "col": 1.3,
+            "row": 2.7,
+            "sub": "Máy tính đầu tiên"
+          },
+          {
+            "id": "m2",
+            "type": "icon",
+            "icon": "img:fluent-emoji-flat/desktop-computer",
+            "label": "1970s",
+            "col": 2.65,
+            "row": 2.7,
+            "sub": "Máy tính cá nhân"
+          },
+          {
+            "id": "m3",
+            "type": "icon",
+            "icon": "img:fluent-emoji-flat/globe-with-meridians",
+            "label": "1990s",
+            "col": 4.0,
+            "row": 2.7,
+            "sub": "Internet"
+          },
+          {
+            "id": "m4",
+            "type": "icon",
+            "icon": "img:fluent-color/cloud",
+            "label": "2010s",
+            "col": 5.35,
+            "row": 2.7,
+            "sub": "Điện toán đám mây"
+          },
+          {
+            "id": "m5",
+            "type": "icon",
+            "icon": "img:fluent-emoji-flat/robot",
+            "label": "2020s",
+            "col": 6.7,
+            "row": 2.7,
+            "sub": "AI tạo sinh"
+          },
+          {
+            "id": "sum_t",
+            "type": "text",
+            "label": "Ý chính của video",
+            "col": 4,
+            "row": 2.5,
+            "size": 64,
+            "color": "accent"
+          },
+          {
+            "id": "qn_t",
+            "type": "text",
+            "label": "Câu hỏi để bạn nghĩ tiếp",
+            "col": 4,
+            "row": 2.5,
+            "size": 64,
+            "color": "purple"
+          }
+        ],
+        "edges": [
+          {
+            "id": "e2",
+            "from": "m1",
+            "to": "m2"
+          },
+          {
+            "id": "e3",
+            "from": "m2",
+            "to": "m3"
+          },
+          {
+            "id": "e4",
+            "from": "m3",
+            "to": "m4"
+          },
+          {
+            "id": "e5",
+            "from": "m4",
+            "to": "m5"
+          }
+        ],
+        "beats": [
+          {
+            "text": "Câu chuyện bắt đầu từ một cột mốc đầu tiên.",
+            "do": {
+              "show": [
+                "bit",
+                "m1"
+              ],
+              "highlight": [
+                "m1"
+              ]
+            }
+          },
+          {
+            "text": "Rồi đến máy tính cá nhân.",
+            "do": {
+              "show": [
+                "m2",
+                "e2"
+              ],
+              "flow": [
+                "e2"
+              ],
+              "highlight": [
+                "m2"
+              ]
+            }
+          },
+          {
+            "text": "Rồi đến internet.",
+            "do": {
+              "show": [
+                "m3",
+                "e3"
+              ],
+              "flow": [
+                "e3"
+              ],
+              "highlight": [
+                "m3"
+              ]
+            }
+          },
+          {
+            "text": "Rồi đến điện toán đám mây.",
+            "do": {
+              "show": [
+                "m4",
+                "e4"
+              ],
+              "flow": [
+                "e4"
+              ],
+              "highlight": [
+                "m4"
+              ]
+            }
+          },
+          {
+            "text": "Rồi đến ai tạo sinh.",
+            "do": {
+              "show": [
+                "m5",
+                "e5"
+              ],
+              "flow": [
+                "e5"
+              ],
+              "highlight": [
+                "m5"
+              ]
+            }
+          },
+          {
+            "text": "Tóm lại, nêu ba ý chính vừa học, mỗi ý một câu ngắn gọn.",
+            "role": "summary",
+            "do": {
+              "clear": true,
+              "show": [
+                "sum_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "happy",
+                  "label": "Tóm lại"
+                }
+              }
+            }
+          },
+          {
+            "text": "Câu hỏi mở để bạn suy nghĩ, gợi sang nội dung của video tiếp theo.",
+            "role": "question",
+            "do": {
+              "hide": [
+                "sum_t"
+              ],
+              "show": [
+                "qn_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "think",
+                  "label": "Hmm?"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

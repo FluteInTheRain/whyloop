@@ -1,0 +1,202 @@
+{
+  "title": "TÊN VIDEO",
+  "meta": {
+    "topic": "A so với B",
+    "target_seconds": 40,
+    "subtitles": false,
+    "question": "Câu hỏi mở để người xem tự suy nghĩ (≤ 14 từ)?"
+  },
+  "scenes": [
+    {
+      "id": "story",
+      "kind": "diagram",
+      "visual_note": "Hai khung A và B; lần lượt thêm ưu/nhược điểm; mascot gợi ý chọn.",
+      "props": {
+        "nodes": [
+          {
+            "id": "bit",
+            "type": "mascot",
+            "col": 1,
+            "row": 5,
+            "size": 150,
+            "expr": "think",
+            "look": "right"
+          },
+          {
+            "id": "ga",
+            "type": "group",
+            "label": "Phương án A",
+            "col": 2.6,
+            "row": 2.6,
+            "w": 620,
+            "h": 520
+          },
+          {
+            "id": "gb",
+            "type": "group",
+            "label": "Phương án B",
+            "col": 5.4,
+            "row": 2.6,
+            "w": 620,
+            "h": 520
+          },
+          {
+            "id": "ia",
+            "type": "icon",
+            "icon": "cube",
+            "col": 2.6,
+            "row": 2,
+            "size": 110
+          },
+          {
+            "id": "ib",
+            "type": "icon",
+            "icon": "cloud",
+            "col": 5.4,
+            "row": 2,
+            "size": 110
+          },
+          {
+            "id": "a1",
+            "type": "text",
+            "label": "✓ Ưu điểm A",
+            "col": 2.6,
+            "row": 3.1,
+            "size": 40,
+            "color": "green"
+          },
+          {
+            "id": "a2",
+            "type": "text",
+            "label": "✗ Nhược điểm A",
+            "col": 2.6,
+            "row": 3.7,
+            "size": 40,
+            "color": "red"
+          },
+          {
+            "id": "b1",
+            "type": "text",
+            "label": "✓ Ưu điểm B",
+            "col": 5.4,
+            "row": 3.1,
+            "size": 40,
+            "color": "green"
+          },
+          {
+            "id": "b2",
+            "type": "text",
+            "label": "✗ Nhược điểm B",
+            "col": 5.4,
+            "row": 3.7,
+            "size": 40,
+            "color": "red"
+          },
+          {
+            "id": "sum_t",
+            "type": "text",
+            "label": "Tóm lại: 3 ý chính",
+            "col": 4,
+            "row": 2,
+            "size": 72,
+            "color": "primary"
+          },
+          {
+            "id": "qn_t",
+            "type": "text",
+            "label": "Câu hỏi cho bạn?",
+            "col": 4,
+            "row": 3,
+            "size": 84,
+            "color": "accent"
+          }
+        ],
+        "edges": [],
+        "beats": [
+          {
+            "text": "Hai lựa chọn bạn đang cân nhắc.",
+            "do": {
+              "show": [
+                "bit",
+                "ga",
+                "gb",
+                "ia",
+                "ib"
+              ]
+            }
+          },
+          {
+            "text": "Phương án A mạnh ở đâu, yếu ở đâu.",
+            "do": {
+              "show": [
+                "a1",
+                "a2"
+              ],
+              "highlight": [
+                "ga"
+              ]
+            }
+          },
+          {
+            "text": "Phương án B thì ngược lại.",
+            "do": {
+              "show": [
+                "b1",
+                "b2"
+              ],
+              "highlight": [
+                "gb"
+              ]
+            }
+          },
+          {
+            "text": "Chọn cái nào còn tùy tình huống.",
+            "do": {
+              "highlight": [],
+              "set": {
+                "bit": {
+                  "expr": "wink",
+                  "label": "Tùy bài toán!"
+                }
+              }
+            }
+          },
+          {
+            "text": "Tóm lại, nêu ba ý chính vừa học, mỗi ý một câu ngắn gọn.",
+            "role": "summary",
+            "do": {
+              "clear": true,
+              "show": [
+                "sum_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "happy",
+                  "label": "Tóm lại"
+                }
+              }
+            }
+          },
+          {
+            "text": "Câu hỏi mở để bạn suy nghĩ, gợi sang nội dung của video tiếp theo.",
+            "role": "question",
+            "do": {
+              "hide": [
+                "sum_t"
+              ],
+              "show": [
+                "qn_t"
+              ],
+              "set": {
+                "bit": {
+                  "expr": "think",
+                  "label": "Hmm?"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
