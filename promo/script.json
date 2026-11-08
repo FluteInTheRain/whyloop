@@ -1,0 +1,42 @@
+{
+  "voice": "am_michael",
+  "speed": 0.97,
+  "scenes": [
+    {
+      "id": "hook",
+      "vo": "What if an entire video course could be built like software? Not edited. Compiled."
+    },
+    {
+      "id": "pain",
+      "vo": "Making one explainer video by hand means writing, animating, recording, translating, and checking every single frame. Do that thirty six times, and something has to give."
+    },
+    {
+      "id": "idea",
+      "vo": "WhyLoop is my answer. It takes one chapter of a machine learning textbook, and turns it into a finished, bilingual episode, ready for YouTube."
+    },
+    {
+      "id": "flow",
+      "vo": "Here is the whole flow, in six steps. Step one: pick a chapter of the book, and re-explain it in new words. Step two: a Python program simulates data and fits the models, so every number is computed. Step three: it writes one script file, with English text, Vietnamese text, and the visuals for every beat. Step four: a layout linter checks that file, and sends it back for fixing until it is clean. Step five: only then the render starts, with picture, English voice, Vietnamese dub, and music. Step six: out come two files, ready to upload to YouTube."
+    },
+    {
+      "id": "data",
+      "vo": "The script is not typed. It is generated from simulated data and models fitted from scratch. So every number you see on screen, and every number you hear, comes from the same computed value."
+    },
+    {
+      "id": "lint",
+      "vo": "Before anything renders, a layout linter opens each beat in headless Chrome and measures the real text boxes. One overlap, one word off the screen, and the render refuses to start."
+    },
+    {
+      "id": "sound",
+      "vo": "Then comes sound. English narration, plus a Vietnamese dub fitted into the exact time slot of every beat, mixed with generated music."
+    },
+    {
+      "id": "result",
+      "vo": "The result: fourteen episodes live on YouTube. Nine hundred and sixty seven animated beats. About two and a half hours of video, in two languages."
+    },
+    {
+      "id": "cta",
+      "vo": "The code is open on GitHub. Ask why. Then ask again."
+    }
+  ]
+}

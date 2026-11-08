@@ -5,6 +5,8 @@ import { IconSheet, LibSheet, MascotSheet, MathSheet, SheetProps } from "./Sheet
 import { Avatar, AvatarProps } from "./Avatar";
 import { Banner, BannerProps, Watermark } from "./ChannelArt";
 import { Thumbnail, ThumbProps } from "./Thumbnail";
+import { Promo, PromoProps } from "./Promo";
+import promoTimeline from "../promo/timeline.json";
 
 export const Root = () => (
   <>
@@ -23,6 +25,9 @@ export const Root = () => (
     defaultProps={{ theme: "spectrum" } as SheetProps} />
   <Composition id="MascotSheet" component={MascotSheet} durationInFrames={1} fps={30} width={1920} height={1080}
     defaultProps={{ theme: "neon" } as SheetProps} />
+  <Composition id="Promo" component={Promo} durationInFrames={30} fps={30} width={1920} height={1080}
+    defaultProps={promoTimeline as unknown as PromoProps}
+    calculateMetadata={({ props }) => ({ durationInFrames: props.scenes.reduce((a, x) => a + x.durationInFrames, 0), fps: props.fps })} />
   <Composition
     id="Main"
     component={Video}

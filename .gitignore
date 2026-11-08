@@ -10,6 +10,7 @@ __pycache__/
 out/
 props/
 public/audio/
+public/promo/
 public/brand/
 public/sfx/
 public/lib/

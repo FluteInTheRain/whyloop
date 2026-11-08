@@ -1,0 +1,239 @@
+{
+ "title": "How a web request travels",
+ "title_vi": "Hành trình của một yêu cầu web",
+ "meta": {
+  "topic": "A web request through a load balancer",
+  "target_seconds": 25,
+  "subtitles": false,
+  "lang": "en",
+  "audio_langs": [
+   "en",
+   "vi"
+  ],
+  "question": "What if one server went down?",
+  "question_vi": "Nếu một máy chủ ngừng hoạt động thì sao?"
+ },
+ "scenes": [
+  {
+   "id": "story",
+   "kind": "diagram",
+   "visual_note": "Five nodes light up in order, a packet runs along the edges.",
+   "props": {
+    "nodes": [
+     {
+      "id": "bit",
+      "type": "mascot",
+      "x": 150,
+      "y": 985,
+      "size": 170,
+      "expr": "idle",
+      "look": "right"
+     },
+     {
+      "id": "n1",
+      "type": "icon",
+      "icon": "user",
+      "label": "You",
+      "col": 1.5,
+      "row": 2.5
+     },
+     {
+      "id": "n2",
+      "type": "icon",
+      "icon": "browser",
+      "label": "App",
+      "col": 2.8,
+      "row": 2.5
+     },
+     {
+      "id": "n3",
+      "type": "icon",
+      "icon": "balance",
+      "label": "Load balancer",
+      "col": 4.1,
+      "row": 2.5
+     },
+     {
+      "id": "n4",
+      "type": "icon",
+      "icon": "server",
+      "label": "Server",
+      "col": 5.4,
+      "row": 2.5
+     },
+     {
+      "id": "n5",
+      "type": "icon",
+      "icon": "db",
+      "label": "Database",
+      "col": 6.7,
+      "row": 2.5
+     },
+     {
+      "id": "cap",
+      "type": "text",
+      "label": "One request, one response",
+      "col": 4,
+      "row": 4,
+      "size": 48,
+      "color": "muted"
+     },
+     {
+      "id": "sum_t",
+      "type": "text",
+      "label": "Recap: three ideas",
+      "col": 4,
+      "row": 2,
+      "size": 72,
+      "color": "primary"
+     },
+     {
+      "id": "qn_t",
+      "type": "text",
+      "label": "Your question?",
+      "col": 4,
+      "row": 3,
+      "size": 84,
+      "color": "accent"
+     }
+    ],
+    "edges": [
+     {
+      "id": "a",
+      "from": "n1",
+      "to": "n2"
+     },
+     {
+      "id": "b",
+      "from": "n2",
+      "to": "n3"
+     },
+     {
+      "id": "c",
+      "from": "n3",
+      "to": "n4"
+     },
+     {
+      "id": "d",
+      "from": "n4",
+      "to": "n5"
+     }
+    ],
+    "beats": [
+     {
+      "text": "This is how a web request travels. Start with you and the app.",
+      "text_vi": "Đây là hành trình của một yêu cầu web. Bắt đầu từ bạn và ứng dụng.",
+      "do": {
+       "show": [
+        "bit",
+        "n1",
+        "n2",
+        "a"
+       ]
+      }
+     },
+     {
+      "text": "The request meets a load balancer, which picks a free server.",
+      "text_vi": "Yêu cầu gặp bộ cân bằng tải, nơi chọn một máy chủ đang rảnh.",
+      "do": {
+       "show": [
+        "n3",
+        "b"
+       ],
+       "flow": [
+        "a",
+        "b"
+       ],
+       "highlight": [
+        "n3"
+       ]
+      }
+     },
+     {
+      "text": "The server asks the database, and the answer flows back.",
+      "text_vi": "Máy chủ hỏi cơ sở dữ liệu, rồi câu trả lời chảy ngược lại.",
+      "do": {
+       "show": [
+        "n4",
+        "n5",
+        "c",
+        "d"
+       ],
+       "flow": [
+        "c",
+        "d"
+       ],
+       "highlight": [
+        "n5"
+       ],
+       "set": {
+        "bit": {
+         "expr": "wow",
+         "label": "Neat!"
+        }
+       }
+      }
+     },
+     {
+      "text": "One request, one response. That is the whole loop.",
+      "text_vi": "Một yêu cầu, một phản hồi. Đó là cả vòng lặp.",
+      "do": {
+       "highlight": [],
+       "show": [
+        "cap"
+       ],
+       "flow": [
+        "a",
+        "b",
+        "c",
+        "d"
+       ],
+       "set": {
+        "bit": {
+         "expr": "happy",
+         "label": ""
+        }
+       }
+      }
+     },
+     {
+      "text": "Recap: a request goes through three layers and comes back.",
+      "text_vi": "Tóm lại: yêu cầu đi qua ba tầng rồi quay về.",
+      "role": "summary",
+      "do": {
+       "clear": true,
+       "show": [
+        "sum_t"
+       ],
+       "set": {
+        "bit": {
+         "expr": "happy",
+         "label": "Recap"
+        }
+       }
+      }
+     },
+     {
+      "text": "What would happen if one server went down?",
+      "text_vi": "Điều gì xảy ra nếu một máy chủ ngừng hoạt động?",
+      "role": "question",
+      "do": {
+       "hide": [
+        "sum_t"
+       ],
+       "show": [
+        "qn_t"
+       ],
+       "set": {
+        "bit": {
+         "expr": "think",
+         "label": "Hmm?"
+        }
+       }
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

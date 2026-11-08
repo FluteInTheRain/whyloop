@@ -1,0 +1,222 @@
+{
+ "fps": 30,
+ "theme": "spectrum",
+ "scenes": [
+  {
+   "id": "hook",
+   "vo": "promo/vo/hook.wav",
+   "voFrames": 166,
+   "lead": 12,
+   "durationInFrames": 202,
+   "sentences": [
+    {
+     "text": "What if an entire video course could be built like software?",
+     "from": 12,
+     "to": 136
+    },
+    {
+     "text": "Not edited.",
+     "from": 136,
+     "to": 159
+    },
+    {
+     "text": "Compiled.",
+     "from": 159,
+     "to": 178
+    }
+   ]
+  },
+  {
+   "id": "pain",
+   "vo": "promo/vo/pain.wav",
+   "voFrames": 360,
+   "lead": 12,
+   "durationInFrames": 396,
+   "sentences": [
+    {
+     "text": "Making one explainer video by hand means writing, animating, recording, translating, and checking every single frame.",
+     "from": 12,
+     "to": 261
+    },
+    {
+     "text": "Do that thirty six times, and something has to give.",
+     "from": 261,
+     "to": 372
+    }
+   ]
+  },
+  {
+   "id": "idea",
+   "vo": "promo/vo/idea.wav",
+   "voFrames": 307,
+   "lead": 12,
+   "durationInFrames": 343,
+   "sentences": [
+    {
+     "text": "WhyLoop is my answer.",
+     "from": 12,
+     "to": 58
+    },
+    {
+     "text": "It takes one chapter of a machine learning textbook, and turns it into a finished, bilingual episode, ready for YouTube.",
+     "from": 58,
+     "to": 319
+    }
+   ]
+  },
+  {
+   "id": "flow",
+   "vo": "promo/vo/flow.wav",
+   "voFrames": 1165,
+   "lead": 12,
+   "durationInFrames": 1201,
+   "sentences": [
+    {
+     "text": "Here is the whole flow, in six steps.",
+     "from": 12,
+     "to": 91
+    },
+    {
+     "text": "Step one: pick a chapter of the book, and re-explain it in new words.",
+     "from": 91,
+     "to": 238
+    },
+    {
+     "text": "Step two: a Python program simulates data and fits the models, so every number is computed.",
+     "from": 238,
+     "to": 432
+    },
+    {
+     "text": "Step three: it writes one script file, with English text, Vietnamese text, and the visuals for every beat.",
+     "from": 432,
+     "to": 658
+    },
+    {
+     "text": "Step four: a layout linter checks that file, and sends it back for fixing until it is clean.",
+     "from": 658,
+     "to": 854
+    },
+    {
+     "text": "Step five: only then the render starts, with picture, English voice, Vietnamese dub, and music.",
+     "from": 854,
+     "to": 1056
+    },
+    {
+     "text": "Step six: out come two files, ready to upload to YouTube.",
+     "from": 1056,
+     "to": 1177
+    }
+   ]
+  },
+  {
+   "id": "data",
+   "vo": "promo/vo/data.wav",
+   "voFrames": 393,
+   "lead": 12,
+   "durationInFrames": 429,
+   "sentences": [
+    {
+     "text": "The script is not typed.",
+     "from": 12,
+     "to": 62
+    },
+    {
+     "text": "It is generated from simulated data and models fitted from scratch.",
+     "from": 62,
+     "to": 202
+    },
+    {
+     "text": "So every number you see on screen, and every number you hear, comes from the same computed value.",
+     "from": 202,
+     "to": 405
+    }
+   ]
+  },
+  {
+   "id": "lint",
+   "vo": "promo/vo/lint.wav",
+   "voFrames": 380,
+   "lead": 12,
+   "durationInFrames": 416,
+   "sentences": [
+    {
+     "text": "Before anything renders, a layout linter opens each beat in headless Chrome and measures the real text boxes.",
+     "from": 12,
+     "to": 243
+    },
+    {
+     "text": "One overlap, one word off the screen, and the render refuses to start.",
+     "from": 243,
+     "to": 392
+    }
+   ]
+  },
+  {
+   "id": "sound",
+   "vo": "promo/vo/sound.wav",
+   "voFrames": 296,
+   "lead": 12,
+   "durationInFrames": 332,
+   "sentences": [
+    {
+     "text": "Then comes sound.",
+     "from": 12,
+     "to": 50
+    },
+    {
+     "text": "English narration, plus a Vietnamese dub fitted into the exact time slot of every beat, mixed with generated music.",
+     "from": 50,
+     "to": 308
+    }
+   ]
+  },
+  {
+   "id": "result",
+   "vo": "promo/vo/result.wav",
+   "voFrames": 319,
+   "lead": 12,
+   "durationInFrames": 355,
+   "sentences": [
+    {
+     "text": "The result: fourteen episodes live on YouTube.",
+     "from": 12,
+     "to": 114
+    },
+    {
+     "text": "Nine hundred and sixty seven animated beats.",
+     "from": 114,
+     "to": 211
+    },
+    {
+     "text": "About two and a half hours of video, in two languages.",
+     "from": 211,
+     "to": 331
+    }
+   ]
+  },
+  {
+   "id": "cta",
+   "vo": "promo/vo/cta.wav",
+   "voFrames": 123,
+   "lead": 12,
+   "durationInFrames": 159,
+   "sentences": [
+    {
+     "text": "The code is open on GitHub.",
+     "from": 12,
+     "to": 78
+    },
+    {
+     "text": "Ask why.",
+     "from": 78,
+     "to": 98
+    },
+    {
+     "text": "Then ask again.",
+     "from": 98,
+     "to": 135
+    }
+   ]
+  }
+ ]
+}
