@@ -9,5 +9,8 @@
   "LDA": "L D A",
   "QDA": "Q D A",
   "ROC": "R O C",
-  "AUC": "A U C"
+  "AUC": "A U C",
+  "LOOCV": "L O O C V",
+  "CV": "C V",
+  "k-fold": "K fold"
 }

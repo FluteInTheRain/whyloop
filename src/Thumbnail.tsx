@@ -11,7 +11,7 @@ export type ThumbProps = {
   line1?: string; line2?: string; series?: string; caption?: string;
   lines?: string[]; lineSize?: number;   // variant A: big title lines (default: the Vietnamese three-line title)
   tex?: string; texSize?: number;        // variant B headline formula (default f(X)+ε)
-  figure?: "f" | "fits" | "bv" | "u" | "knn" | "sky" | "bridge" | "fork" | "exam" | "darts" | "map" | "springs" | "band" | "stall" | "jug" | "traps" | "switch" | "sbend" | "paradox" | "cafe" | "hills" | "corral";          // picture on the right: episode 1 "f" (data, f, noise), episode 2 "fits" (line, truth, wiggle), episode 4 "bv" (bias, variance, the U)
+  figure?: "f" | "fits" | "bv" | "u" | "knn" | "sky" | "bridge" | "fork" | "exam" | "darts" | "map" | "springs" | "band" | "stall" | "jug" | "traps" | "switch" | "sbend" | "paradox" | "cafe" | "hills" | "corral" | "holdout" | "folds" | "resample" | "shelf" | "cards";          // picture on the right: episode 1 "f" (data, f, noise), episode 2 "fits" (line, truth, wiggle), episode 4 "bv" (bias, variance, the U)
 };
 
 // deterministic scatter around 2 + 4*sqrt(x), the same picture the lesson builds
@@ -225,7 +225,7 @@ const Illus = ({ kind, w = 1280, h = 720 }: { kind: "sky" | "bridge"; w?: number
 };
 
 // ---- scenes for the "life metaphor" thumbnails (one full-frame illustration per episode) ----
-const Scene = ({ kind, w = 1280, h = 720 }: { kind: "fork" | "exam" | "darts" | "map" | "springs" | "band" | "stall" | "jug" | "traps" | "switch" | "sbend" | "paradox" | "cafe" | "hills" | "corral"; w?: number; h?: number }) => {
+const Scene = ({ kind, w = 1280, h = 720 }: { kind: "fork" | "exam" | "darts" | "map" | "springs" | "band" | "stall" | "jug" | "traps" | "switch" | "sbend" | "paradox" | "cafe" | "hills" | "corral" | "holdout" | "folds" | "resample" | "shelf" | "cards"; w?: number; h?: number }) => {
   const r = lcg(11);
   if (kind === "hills") {
     // episode 15: two bell-shaped hills (big cyan = genuine, small red = fake) with a purple fence where they cross (the LDA boundary); few objects, big labels
@@ -271,6 +271,184 @@ const Scene = ({ kind, w = 1280, h = 720 }: { kind: "fork" | "exam" | "darts" | 
         <g transform={`translate(${cx + 150} ${cy - 205})`}><circle r={38} fill="#ff5c5c" stroke="#fff" strokeWidth={6} /><path d="M-15 -15L15 15M15 -15L-15 15" stroke="#fff" strokeWidth={9} strokeLinecap="round" /></g>
         <text x={cx} y={cy + 190} textAnchor="middle" fontSize={44} fontWeight={800} fill="#a97bff" stroke="#0b0f1a" strokeWidth={10} paintOrder="stroke" fontFamily="inherit">curved fence</text>
         <text x={cx + 300} y={cy + 10} textAnchor="middle" fontSize={34} fontWeight={800} fill="#c9ccd6" stroke="#0b0f1a" strokeWidth={9} paintOrder="stroke" fontFamily="inherit">straight line</text>
+      </svg>
+    );
+  }
+  if (kind === "cards") {
+    // episode 17 (cross-validation): a row of cards on a table; the ones already tested are face up with a green tick, the one being
+    // tested now is lifted and glowing with a "?", the rest are face down: every card gets exactly one turn as the test
+    const cw = 124, ch = 178, y0 = 416, x0 = 298, pitch = 135, n = 7, cur = 3;
+    const Card = ({ i, state }: { i: number; state: "done" | "now" | "wait" }) => {
+      const x = x0 + i * pitch, lift = state === "now" ? 46 : 0, tilt = state === "now" ? -6 : 0;
+      return (
+        <g transform={`translate(${x + cw / 2} ${y0 + ch / 2 - lift}) rotate(${tilt}) translate(${-cw / 2} ${-ch / 2})`} filter={state === "now" ? "url(#cdShadowBig)" : "url(#cdShadow)"}>
+          {state === "wait" ? (
+            <g>
+              <rect width={cw} height={ch} rx={11} fill="url(#cdBack)" />
+              <rect x={9} y={9} width={cw - 18} height={ch - 18} rx={6} fill="url(#cdLattice)" stroke="#e8efff" strokeOpacity={0.85} strokeWidth={3} />
+              <rect width={cw} height={ch} rx={11} fill="url(#cdSheen)" />
+            </g>
+          ) : (
+            <g>
+              <rect width={cw} height={ch} rx={11} fill="url(#cdFace)" stroke="#cfc7b4" strokeWidth={2} />
+              {state === "done" ? (
+                <path d={`M${cw * 0.24} ${ch * 0.52} L${cw * 0.43} ${ch * 0.68} L${cw * 0.78} ${ch * 0.3}`} fill="none" stroke="#25b36b" strokeWidth={17} strokeLinecap="round" strokeLinejoin="round" />
+              ) : (
+                <text x={cw / 2} y={ch * 0.72} textAnchor="middle" fontSize={140} fontWeight={800} fill="#f2b705" stroke="#6b4a00" strokeWidth={3} fontFamily="inherit">?</text>
+              )}
+              <rect width={cw} height={ch} rx={11} fill="url(#cdSheen)" />
+            </g>
+          )}
+        </g>
+      );
+    };
+    return (
+      <svg width={w} height={h} style={{ position: "absolute", left: 0, top: 0 }}>
+        <defs>
+          <linearGradient id="cdWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#1b2350" /><stop offset="1" stopColor="#0b0f2a" /></linearGradient>
+          <linearGradient id="cdTable" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#1c4a43" /><stop offset="1" stopColor="#0c2622" /></linearGradient>
+          <radialGradient id="cdLamp" cx="0.62" cy="0.7" r="0.5"><stop offset="0" stopColor="#ffe9a8" stopOpacity={0.34} /><stop offset="1" stopColor="#ffe9a8" stopOpacity={0} /></radialGradient>
+          <linearGradient id="cdFace" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#fffdf6" /><stop offset="1" stopColor="#e6e0d0" /></linearGradient>
+          <linearGradient id="cdBack" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#2b5da8" /><stop offset="1" stopColor="#173a73" /></linearGradient>
+          <linearGradient id="cdSheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#fff" stopOpacity={0.22} /><stop offset="0.45" stopColor="#fff" stopOpacity={0} /><stop offset="1" stopColor="#000" stopOpacity={0.22} /></linearGradient>
+          <pattern id="cdLattice" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="16" height="16" fill="#1b4686" /><path d="M0 0H16M0 0V16" stroke="#8fb2ee" strokeOpacity={0.5} strokeWidth={2} /></pattern>
+          <filter id="cdShadow" x="-30%" y="-20%" width="160%" height="150%"><feDropShadow dx="5" dy="8" stdDeviation="6" floodColor="#000" floodOpacity="0.55" /></filter>
+          <filter id="cdShadowBig" x="-50%" y="-30%" width="200%" height="170%"><feDropShadow dx="12" dy="22" stdDeviation="12" floodColor="#000" floodOpacity="0.6" /></filter>
+          <filter id="cdGlow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="16" /></filter>
+        </defs>
+        <rect width={w} height={h} fill="url(#cdWall)" />
+        <rect y={330} width={w} height={h - 330} fill="url(#cdTable)" />
+        <rect y={330} width={w} height={6} fill="#37766b" fillOpacity={0.7} />
+        <rect width={w} height={h} fill="url(#cdLamp)" />
+        <ellipse cx={x0 + cur * pitch + cw / 2 + 4} cy={y0 + ch / 2 - 46} rx={cw * 0.95} ry={ch * 0.8} fill="#ffd23f" fillOpacity={0.5} filter="url(#cdGlow)" />
+        {Array.from({ length: n }, (_, i) => <Card key={i} i={i} state={i < cur ? "done" : i === cur ? "now" : "wait"} />)}
+        <text x={x0 + cur * pitch + cw / 2} y={y0 - 76} textAnchor="middle" fontSize={44} fontWeight={800} fill="#ffd23f" stroke="#0b0f1a" strokeWidth={10} paintOrder="stroke" fontFamily="inherit">held out</text>
+        <text x={x0 + 1 * pitch + cw / 2} y={y0 + ch + 62} textAnchor="middle" fontSize={38} fontWeight={800} fill="#4ade80" stroke="#0b0f1a" strokeWidth={9} paintOrder="stroke" fontFamily="inherit">tested</text>
+      </svg>
+    );
+  }
+  if (kind === "shelf") {
+    // episode 17 (LOOCV): a row of books on a wooden shelf whose heights trace a curve; one is pulled out (held out), the gap shows
+    // what the model predicted from the others (purple curve) against the real height (yellow): the residual is the error
+    const base = 590, x0 = 330, bw = 74, pitch = 79, n = 11, pull = 6;
+    const hs = Array.from({ length: n }, (_, i) => 150 + 120 * Math.exp(-(((i - 6) / 3.3) ** 2)) + [0, 7, -5, 4, -6, 5, 0, -4, 6, -3, 3][i]);
+    const cols = ["#1d6f86", "#245f94", "#1b8195", "#2a5b82", "#1f7a8e", "#2d6d9c", "#e0a82e", "#206b80", "#27628f", "#1c7d90", "#2b5f86"];
+    const cx = (i: number) => x0 + i * pitch + bw / 2;
+    const predTop = base - (hs[pull] - 72);
+    const trueTop = base - hs[pull];
+    const pts: [number, number][] = hs.map((hh, i) => [cx(i), (i === pull ? predTop : base - hh) - 16]);
+    const cr = pts.map((q, i) => {
+      if (i === 0) return `M${q[0]} ${q[1]}`;
+      const p0 = pts[Math.max(0, i - 2)], p1 = pts[i - 1], p2 = q, p3 = pts[Math.min(n - 1, i + 1)];
+      return `C${(p1[0] + (p2[0] - p0[0]) / 6).toFixed(1)} ${(p1[1] + (p2[1] - p0[1]) / 6).toFixed(1)} ${(p2[0] - (p3[0] - p1[0]) / 6).toFixed(1)} ${(p2[1] - (p3[1] - p1[1]) / 6).toFixed(1)} ${p2[0]} ${p2[1]}`;
+    }).join(" ");
+    const Book = ({ i, lift = 0, tilt = 0, dx = 0 }: { i: number; lift?: number; tilt?: number; dx?: number }) => {
+      const x = x0 + i * pitch, hh = hs[i], y = base - hh;
+      return (
+        <g transform={`translate(${x + bw / 2 + dx} ${base - lift}) rotate(${tilt}) translate(${-bw / 2} ${-base + lift})`} filter={lift ? "url(#bkShadowBig)" : undefined}>
+          <rect x={0} y={y - lift} width={bw} height={hh} rx={3} fill={cols[i]} />
+          <rect x={0} y={y - lift} width={bw} height={hh} rx={3} fill="url(#spine)" />
+          <rect x={0} y={y - lift} width={bw} height={7} rx={3} fill="#f3e9d2" fillOpacity={0.55} />
+          <rect x={6} y={y - lift + 22} width={bw - 12} height={4} fill="#e9d49a" fillOpacity={0.8} />
+          <rect x={6} y={y - lift + 30} width={bw - 12} height={2} fill="#e9d49a" fillOpacity={0.6} />
+          <rect x={10} y={y - lift + hh * 0.42} width={bw - 20} height={hh * 0.2} rx={2} fill="#f1e6c8" fillOpacity={0.88} />
+          <rect x={16} y={y - lift + hh * 0.42 + 9} width={bw - 32} height={3} fill="#5a4a2a" fillOpacity={0.55} />
+          <rect x={20} y={y - lift + hh * 0.42 + 18} width={bw - 40} height={3} fill="#5a4a2a" fillOpacity={0.4} />
+          <rect x={6} y={y - lift + hh - 30} width={bw - 12} height={4} fill="#e9d49a" fillOpacity={0.8} />
+          <rect x={6} y={y - lift + hh - 22} width={bw - 12} height={2} fill="#e9d49a" fillOpacity={0.6} />
+        </g>
+      );
+    };
+    return (
+      <svg width={w} height={h} style={{ position: "absolute", left: 0, top: 0 }}>
+        <defs>
+          <linearGradient id="shWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#1d2552" /><stop offset="1" stopColor="#0b0f2a" /></linearGradient>
+          <radialGradient id="shLight" cx="0.68" cy="0.42" r="0.6"><stop offset="0" stopColor="#ffd98a" stopOpacity={0.28} /><stop offset="1" stopColor="#ffd98a" stopOpacity={0} /></radialGradient>
+          <linearGradient id="shWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#a9743f" /><stop offset="0.12" stopColor="#8a5a2f" /><stop offset="1" stopColor="#4a2d16" /></linearGradient>
+          <linearGradient id="spine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#000" stopOpacity={0.5} /><stop offset="0.22" stopColor="#fff" stopOpacity={0.2} /><stop offset="0.55" stopColor="#000" stopOpacity={0.02} /><stop offset="1" stopColor="#000" stopOpacity={0.5} /></linearGradient>
+          <linearGradient id="slot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#05070f" /><stop offset="1" stopColor="#101632" /></linearGradient>
+          <filter id="bkShadowBig" x="-40%" y="-30%" width="190%" height="170%"><feDropShadow dx="14" dy="18" stdDeviation="12" floodColor="#000" floodOpacity="0.65" /></filter>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9" /></filter>
+        </defs>
+        <rect width={w} height={h} fill="url(#shWall)" />
+        <rect width={w} height={h} fill="url(#shLight)" />
+        <rect x={0} y={base} width={w} height={52} fill="url(#shWood)" />
+        <rect x={0} y={base} width={w} height={5} fill="#d19a5e" fillOpacity={0.8} />
+        {[630, 612, 640].map((yy, k) => <rect key={k} x={0} y={yy} width={w} height={1.5} fill="#2a180a" fillOpacity={0.35} />)}
+        <rect x={0} y={base + 52} width={w} height={h - base - 52} fill="#0a0d20" />
+        <rect x={0} y={base + 52} width={w} height={26} fill="#000" fillOpacity={0.45} />
+        {/* the empty slot where the held-out book stood */}
+        <rect x={x0 + pull * pitch - 2} y={trueTop - 14} width={bw + 4} height={hs[pull] + 14} fill="url(#slot)" />
+        {hs.map((_, i) => i !== pull && <ellipse key={"sh" + i} cx={x0 + i * pitch + bw / 2 + 8} cy={base + 3} rx={bw / 2 + 8} ry={5} fill="#000" fillOpacity={0.45} />)}
+        {hs.map((_, i) => i !== pull && <Book key={i} i={i} />)}
+        {/* what the model predicts for the missing book (curve fitted on the others) and the error */}
+        <path d={cr} fill="none" stroke="#b58cff" strokeWidth={5} strokeDasharray="14 9" strokeLinecap="round" />
+        <line x1={cx(pull)} y1={predTop - 16} x2={cx(pull)} y2={trueTop - 4} stroke="#ff5c5c" strokeWidth={5} strokeDasharray="7 6" />
+        <circle cx={cx(pull)} cy={predTop - 16} r={9} fill="#0b0f1a" stroke="#b58cff" strokeWidth={5} />
+        <circle cx={cx(pull)} cy={trueTop - 4} r={9} fill="#ffd23f" stroke="#fff" strokeWidth={3} />
+        {/* the held-out book, pulled forward and lit */}
+        <ellipse cx={cx(pull) + 130} cy={base - hs[pull] / 2 - 64} rx={100} ry={hs[pull] / 2 + 40} fill="#ffd23f" fillOpacity={0.35} filter="url(#glow)" />
+        <Book i={pull} lift={64} tilt={9} dx={120} />
+        <text x={cx(pull) + 150} y={base - hs[pull] - 100} fontSize={44} fontWeight={800} fill="#ffd23f" stroke="#0b0f1a" strokeWidth={10} paintOrder="stroke" fontFamily="inherit">held out</text>
+        <text x={cx(pull) - 128} y={trueTop - 30} fontSize={36} fontWeight={800} fill="#ff5c5c" stroke="#0b0f1a" strokeWidth={9} paintOrder="stroke" fontFamily="inherit">error</text>
+      </svg>
+    );
+  }
+  if (kind === "holdout") {
+    // episode 17: ten data points and a fitted curve; one yellow point is held out and the red gap between it and the curve is the test error
+    const cv = (x: number) => 500 - 120 * Math.sin(((x - 600) / 640) * Math.PI);
+    const offs = [10, -14, 12, -8, 14, 0, -12, 9, -10, 11];
+    const xs = Array.from({ length: 10 }, (_, i) => 610 + i * 69);
+    const hi = 6, hx = xs[hi], hy = cv(hx) - 130;
+    const curve = Array.from({ length: 65 }, (_, i) => { const x = 590 + i * 10.4; return `${i ? "L" : "M"}${x.toFixed(1)} ${cv(x).toFixed(1)}`; }).join("");
+    return (
+      <svg width={w} height={h} style={{ position: "absolute", left: 0, top: 0 }}>
+        <defs><linearGradient id="hog" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#1b2350" /><stop offset="1" stopColor="#0c1028" /></linearGradient></defs>
+        <rect width={w} height={h} fill="url(#hog)" />
+        <path d={curve} fill="none" stroke="#a97bff" strokeWidth={12} strokeLinecap="round" />
+        {xs.map((x, i) => i === hi ? null : <circle key={i} cx={x} cy={cv(x) + offs[i]} r={24} fill="#22d3ee" stroke="#fff" strokeWidth={5} />)}
+        <line x1={hx} y1={hy + 30} x2={hx} y2={cv(hx) - 6} stroke="#ff5c5c" strokeWidth={9} strokeDasharray="14 10" strokeLinecap="round" />
+        <circle cx={hx} cy={hy} r={32} fill="#ffd23f" stroke="#fff" strokeWidth={6} />
+        <text x={hx} y={hy - 52} textAnchor="middle" fontSize={46} fontWeight={800} fill="#ffd23f" stroke="#0b0f1a" strokeWidth={10} paintOrder="stroke" fontFamily="inherit">held out</text>
+        <text x={hx + 70} y={(hy + cv(hx)) / 2 + 14} fontSize={46} fontWeight={800} fill="#ff5c5c" stroke="#0b0f1a" strokeWidth={10} paintOrder="stroke" fontFamily="inherit">error</text>
+        <text x={900} y={640} textAnchor="middle" fontSize={40} fontWeight={800} fill="#a97bff" stroke="#0b0f1a" strokeWidth={9} paintOrder="stroke" fontFamily="inherit">model never saw it</text>
+      </svg>
+    );
+  }
+  if (kind === "folds") {
+    // episode 18: five rounds of k-fold cross-validation: a 5x5 grid whose yellow diagonal is the held-out fold each round
+    const sz = 84, gap = 12, x0 = 790, y0 = 175;
+    return (
+      <svg width={w} height={h} style={{ position: "absolute", left: 0, top: 0 }}>
+        <defs><linearGradient id="fog" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#1b2350" /><stop offset="1" stopColor="#0c1028" /></linearGradient></defs>
+        <rect width={w} height={h} fill="url(#fog)" />
+        {Array.from({ length: 5 }, (_, r) => Array.from({ length: 5 }, (_, c) => <rect key={`${r}${c}`} x={x0 + c * (sz + gap)} y={y0 + r * (sz + gap)} width={sz} height={sz} rx={16} fill={r === c ? "#ffd23f" : "#34d399"} stroke="#fff" strokeWidth={5} />))}
+        {Array.from({ length: 5 }, (_, r) => <text key={r} x={x0 - 24} y={y0 + r * (sz + gap) + sz / 2 + 14} textAnchor="end" fontSize={40} fontWeight={800} fill="#c9ccd6" stroke="#0b0f1a" strokeWidth={8} paintOrder="stroke" fontFamily="inherit">{r + 1}</text>)}
+        <g transform={`translate(${x0} 672)`}>
+          <rect width={34} height={34} rx={8} fill="#34d399" stroke="#fff" strokeWidth={4} /><text x={48} y={29} fontSize={36} fontWeight={800} fill="#34d399" stroke="#0b0f1a" strokeWidth={8} paintOrder="stroke" fontFamily="inherit">train</text>
+          <rect x={200} width={34} height={34} rx={8} fill="#ffd23f" stroke="#fff" strokeWidth={4} /><text x={248} y={29} fontSize={36} fontWeight={800} fill="#ffd23f" stroke="#0b0f1a" strokeWidth={8} paintOrder="stroke" fontFamily="inherit">test</text>
+        </g>
+      </svg>
+    );
+  }
+  if (kind === "resample") {
+    // episode 19: one bag of eight marbles on the left, three resamples on the right: picked with replacement, so some colours repeat and some vanish
+    const cols = ["#22d3ee", "#34d399", "#ffd23f", "#ff9f43", "#ff7eb6", "#a97bff", "#ff5c5c", "#4c8dff"];
+    const picks = [[0, 2, 2, 5, 5, 7, 3, 1], [4, 4, 1, 6, 0, 6, 6, 2], [7, 3, 3, 0, 5, 1, 1, 4]];
+    const ys = [245, 430, 615];
+    return (
+      <svg width={w} height={h} style={{ position: "absolute", left: 0, top: 0 }}>
+        <defs><linearGradient id="rsg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#1b2350" /><stop offset="1" stopColor="#0c1028" /></linearGradient></defs>
+        <rect width={w} height={h} fill="url(#rsg)" />
+        <rect x={620} y={330} width={190} height={290} rx={36} fill="#ffffff" fillOpacity={0.08} stroke="#fff" strokeWidth={6} />
+        {cols.map((c, i) => <circle key={i} cx={670 + (i % 2) * 90} cy={385 + Math.floor(i / 2) * 64} r={28} fill={c} stroke="#fff" strokeWidth={4} />)}
+        <text x={715} y={668} textAnchor="middle" fontSize={38} fontWeight={800} fill="#c9ccd6" stroke="#0b0f1a" strokeWidth={9} paintOrder="stroke" fontFamily="inherit">one sample</text>
+        {ys.map((y, r) => <path key={r} d={`M820 475 C 860 475, 860 ${y}, 905 ${y}`} fill="none" stroke="#ffd23f" strokeWidth={7} strokeLinecap="round" strokeDasharray="2 14" />)}
+        {ys.map((y, r) => <g key={r}>
+          <rect x={915} y={y - 38} width={8 * 42 + 18} height={76} rx={24} fill="#ffffff" fillOpacity={0.08} stroke="#fff" strokeWidth={5} />
+          {picks[r].map((ci, i) => <circle key={i} cx={948 + i * 42} cy={y} r={17} fill={cols[ci]} stroke="#fff" strokeWidth={3.5} />)}
+        </g>)}
+        <text x={1090} y={706} textAnchor="middle" fontSize={36} fontWeight={800} fill="#ffd23f" stroke="#0b0f1a" strokeWidth={9} paintOrder="stroke" fontFamily="inherit">resamples ×1000</text>
       </svg>
     );
   }
@@ -691,12 +869,12 @@ export const ThumbnailCover = ({ variant = "F", series = "MACHINE LEARNING · 05
   if (variant === "J" || variant === "K" || variant === "S") {
     const mali = brandFont("mali");
     const longest = Math.max(...lines.map((t) => t.length));
-    const budget = ({ fork: 900, darts: 720, paradox: 880, hills: 640, corral: 640 } as Record<string, number>)[figure as string] ?? 600;   // text width available before the scene's objects
+    const budget = ({ fork: 900, darts: 720, paradox: 880, hills: 640, corral: 640, holdout: 640, folds: 640, resample: 640, shelf: 640, cards: 640 } as Record<string, number>)[figure as string] ?? 600;   // text width available before the scene's objects
     const fs = Math.min(150, Math.round(budget / (longest * 0.58)));
     const edge = { WebkitTextStroke: "10px #0b0f1a", paintOrder: "stroke fill" as const };
     return (
       <AbsoluteFill style={{ background: "#0b1030", fontFamily: mali, color: C.text }}>
-        {variant === "S" && (figure === "fork" || figure === "exam" || figure === "darts" || figure === "map" || figure === "springs" || figure === "band" || figure === "stall" || figure === "jug" || figure === "traps" || figure === "cafe" || figure === "switch" || figure === "sbend" || figure === "paradox" || figure === "hills" || figure === "corral") ? <Scene kind={figure} w={1280} h={720} /> : <Illus kind={variant === "J" || figure === "sky" ? "sky" : "bridge"} w={1280} h={720} />}
+        {variant === "S" && (figure === "fork" || figure === "exam" || figure === "darts" || figure === "map" || figure === "springs" || figure === "band" || figure === "stall" || figure === "jug" || figure === "traps" || figure === "cafe" || figure === "switch" || figure === "sbend" || figure === "paradox" || figure === "hills" || figure === "corral" || figure === "holdout" || figure === "folds" || figure === "resample" || figure === "shelf" || figure === "cards") ? <Scene kind={figure} w={1280} h={720} /> : <Illus kind={variant === "J" || figure === "sky" ? "sky" : "bridge"} w={1280} h={720} />}
         <div style={{ position: "absolute", left: 60, top: 44, fontSize: 30, fontWeight: 700, letterSpacing: 6, color: C.go, ...edge }}>{series}</div>
         {lines.map((t, i) => (
           <div key={i} style={{ position: "absolute", left: 54, top: 90 + i * fs * 1.02, fontSize: fs, fontWeight: 700, letterSpacing: -fs / 34,
@@ -724,6 +902,11 @@ export const ThumbnailCover = ({ variant = "F", series = "MACHINE LEARNING · 05
             paradox: { l: 400, t: 330, z: 190, e: "think", lk: "right", p: "right" },
             hills: { l: 60, t: 440, z: 190, e: "aha", lk: "right", p: "eureka" },
             corral: { l: 60, t: 440, z: 190, e: "wow", lk: "right", p: "right" },
+            holdout: { l: 60, t: 440, z: 190, e: "think", lk: "right", p: "right" },
+            folds: { l: 60, t: 440, z: 190, e: "aha", lk: "right", p: "eureka" },
+            resample: { l: 60, t: 440, z: 190, e: "wow", lk: "right", p: "right" },
+            cards: { l: 70, t: 442, z: 190, e: "think", lk: "right", p: "right" },
+            shelf: { l: 70, t: 442, z: 190, e: "think", lk: "right", p: "right" },
             bridge: { l: 1090, t: 460, z: 190, e: "aha", lk: "left", p: "eureka" },
             sky: { l: 1090, t: 520, z: 190, e: "aha", lk: "left", p: "eureka" },
           };
