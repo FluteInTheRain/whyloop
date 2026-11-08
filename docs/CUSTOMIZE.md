@@ -170,7 +170,7 @@ would mean porting that mixing step. Treat it as an advanced project, not a swit
 
 ## 6. The intro video
 
-The 2-minute introduction in the README is made with the same stack: the composition is `src/Promo.tsx`, the narration lives in
+A 2-minute introduction video can be made with the same stack: the composition is `src/Promo.tsx`, the narration lives in
 `promo/script.json`, and `python3 promo/build.py --render` regenerates the voice, the timeline and `out/promo.mp4`. It copies
 thumbnails from the author's episode folders (not part of this repo), so to rebuild it for your own channel replace the
 `assets()` function in `promo/build.py` with your own images and rewrite `promo/script.json`.

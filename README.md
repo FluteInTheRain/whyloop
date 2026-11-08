@@ -13,14 +13,6 @@ music, thumbnail, captions and upload metadata. Everything renders locally.
 | Output | 2560×1440, English picture with English audio, plus a same-length Vietnamese audio track |
 | Code | about 6.7k lines of TypeScript, Python and JS (Remotion front end, Python engine) |
 
-## Watch: the 2-minute introduction
-
-<p align="center"><a href="https://github.com/FluteInTheRain/whyloop/releases/tag/intro-v1"><img src="docs/img/promo-flow.gif" alt="The six steps of the WhyLoop pipeline, sped up: chapter, Python, script.json, lint, render, publish" width="720"></a></p>
-
-**[▶ Watch the full introduction (2:03, English)](https://github.com/FluteInTheRain/whyloop/releases/tag/intro-v1)**: open the release and
-play or download `whyloop-intro.mp4`. The clip above is the part that explains the flow, sped up. The video was made with this
-project itself (`src/Promo.tsx`, `promo/`).
-
 **Want to make your own?** Read [Make it yours](docs/CUSTOMIZE.md): run the included example, change the content and the look,
 and render on a weak computer or in the cloud.
 
@@ -81,7 +73,7 @@ templates/           script templates (compare-two, feedback-loop, math-plot ...
 docs/CUSTOMIZE.md    how to make your own videos: content, look, weak machines, cloud
 docs/USAGE.md        full operating manual (Vietnamese)
 examples/            a small bilingual episode that runs without any private content
-promo/               script and build step of the introduction video (src/Promo.tsx)
+promo/               script and build step of an introduction video (src/Promo.tsx)
 LICENSES.md          licence and copyright review of every component
 CLAUDE.md            the rules the AI assistant follows when making an episode
 ```
