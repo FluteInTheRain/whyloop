@@ -14,8 +14,11 @@
 [**🔄 How it works**](#-how-it-works) •
 [**📺 Episodes**](#-episodes) •
 [**🧱 Engine**](#-engine-building-blocks) •
-[**🚀 Quickstart**](#-quickstart) •
-[**🎨 Make it yours**](#-make-it-yours)
+[**📋 Requirements**](#-requirements) •
+[**📦 Install**](#-installation) •
+[**🚀 Usage**](#-usage) •
+[**🔧 Config**](#-configuration) •
+[**📁 Structure**](#-project-structure)
 
 <img src="docs/img/demo.gif" width="92%" alt="Demo: data points appear, the best line is drawn with its equation, errors show in red, the RSS counts up, a table checks three students" />
 
@@ -55,44 +58,15 @@
 
 ## 📺 Episodes
 
-22 episodes of the *Machine Learning* series, every one produced by this pipeline. **Click a thumbnail to watch.**
+A few of the 22 *Machine Learning* episodes made with this pipeline. **Click a thumbnail to watch**, or see
+[all episodes on the channel](https://www.youtube.com/channel/UCxnTeZD7YM3adHAdMTf2kpQ/videos).
 
 <table align="center">
   <tr>
-    <td align="center" width="25%"><a href="https://youtu.be/X3vczOBjwD4"><img src="https://i.ytimg.com/vi/X3vczOBjwD4/mqdefault.jpg" width="100%" alt="#1 What Is Statistical Learning?" /></a><br/><sub><b>#1</b> What Is Statistical Learning?</sub></td>
-    <td align="center" width="25%"><a href="https://youtu.be/sLPFz0QWKJM"><img src="https://i.ytimg.com/vi/sLPFz0QWKJM/mqdefault.jpg" width="100%" alt="#2 Flexible or Readable?" /></a><br/><sub><b>#2</b> Flexible or Readable?</sub></td>
-    <td align="center" width="25%"><a href="https://youtu.be/8vmG6URqAoY"><img src="https://i.ytimg.com/vi/8vmG6URqAoY/mqdefault.jpg" width="100%" alt="#3 What Makes a Model Good?" /></a><br/><sub><b>#3</b> What Makes a Model Good?</sub></td>
     <td align="center" width="25%"><a href="https://youtu.be/S3yrNzhr9ds"><img src="https://i.ytimg.com/vi/S3yrNzhr9ds/mqdefault.jpg" width="100%" alt="#4 The Bias-Variance Trade-Off" /></a><br/><sub><b>#4</b> The Bias-Variance Trade-Off</sub></td>
-  </tr>
-  <tr>
     <td align="center" width="25%"><a href="https://youtu.be/T7v18poExZU"><img src="https://i.ytimg.com/vi/T7v18poExZU/mqdefault.jpg" width="100%" alt="#5 Bayes vs KNN" /></a><br/><sub><b>#5</b> Bayes vs KNN</sub></td>
-    <td align="center" width="25%"><a href="https://youtu.be/FFw1XGlprRo"><img src="https://i.ytimg.com/vi/FFw1XGlprRo/mqdefault.jpg" width="100%" alt="#6 The Best Straight Line" /></a><br/><sub><b>#6</b> The Best Straight Line</sub></td>
-    <td align="center" width="25%"><a href="https://youtu.be/Pkam2Udb_L8"><img src="https://i.ytimg.com/vi/Pkam2Udb_L8/mqdefault.jpg" width="100%" alt="#7 What a 95% CI Really Means" /></a><br/><sub><b>#7</b> What a 95% CI Really Means</sub></td>
-    <td align="center" width="25%"><a href="https://youtu.be/HH4aVVReehk"><img src="https://i.ytimg.com/vi/HH4aVVReehk/mqdefault.jpg" width="100%" alt="#8 What R² Really Tells You" /></a><br/><sub><b>#8</b> What R² Really Tells You</sub></td>
-  </tr>
-  <tr>
-    <td align="center" width="25%"><a href="https://youtu.be/QN-MGNmrb7o"><img src="https://i.ytimg.com/vi/QN-MGNmrb7o/mqdefault.jpg" width="100%" alt="#9 Multiple Regression" /></a><br/><sub><b>#9</b> Multiple Regression</sub></td>
-    <td align="center" width="25%"><a href="https://youtu.be/mc6sJTRU3W4"><img src="https://i.ytimg.com/vi/mc6sJTRU3W4/mqdefault.jpg" width="100%" alt="#10 Words and Curves in a Linear Model" /></a><br/><sub><b>#10</b> Words and Curves in a Linear Model</sub></td>
-    <td align="center" width="25%"><a href="https://youtu.be/FDEQnuExGQM"><img src="https://i.ytimg.com/vi/FDEQnuExGQM/mqdefault.jpg" width="100%" alt="#11 Your Regression Might Be Lying" /></a><br/><sub><b>#11</b> Your Regression Might Be Lying</sub></td>
-    <td align="center" width="25%"><a href="https://youtu.be/4-J0a049ktg"><img src="https://i.ytimg.com/vi/4-J0a049ktg/mqdefault.jpg" width="100%" alt="#12 Draw a Line or Ask the Neighbours?" /></a><br/><sub><b>#12</b> Draw a Line or Ask the Neighbours?</sub></td>
-  </tr>
-  <tr>
-    <td align="center" width="25%"><a href="https://youtu.be/pK2aYHc2Y-M"><img src="https://i.ytimg.com/vi/pK2aYHc2Y-M/mqdefault.jpg" width="100%" alt="#13 Why a Line Can't Predict Yes/No" /></a><br/><sub><b>#13</b> Why a Line Can't Predict Yes/No</sub></td>
     <td align="center" width="25%"><a href="https://youtu.be/himFbT75CtY"><img src="https://i.ytimg.com/vi/himFbT75CtY/mqdefault.jpg" width="100%" alt="#14 Simpson's Paradox" /></a><br/><sub><b>#14</b> Simpson's Paradox</sub></td>
-    <td align="center" width="25%"><a href="https://youtu.be/-cmYBP5j0H0"><img src="https://i.ytimg.com/vi/-cmYBP5j0H0/mqdefault.jpg" width="100%" alt="#15 Fake Banknotes: LDA" /></a><br/><sub><b>#15</b> Fake Banknotes: LDA</sub></td>
-    <td align="center" width="25%"><a href="https://youtu.be/94gjdesxqM0"><img src="https://i.ytimg.com/vi/94gjdesxqM0/mqdefault.jpg" width="100%" alt="#16 QDA &amp; Choosing a Classifier" /></a><br/><sub><b>#16</b> QDA &amp; Choosing a Classifier</sub></td>
-  </tr>
-  <tr>
-    <td align="center" width="25%"><a href="https://youtu.be/eJ0e5eAF95U"><img src="https://i.ytimg.com/vi/eJ0e5eAF95U/mqdefault.jpg" width="100%" alt="#17 Leave-One-Out Cross-Validation" /></a><br/><sub><b>#17</b> Leave-One-Out Cross-Validation</sub></td>
-    <td align="center" width="25%"><a href="https://youtu.be/7DKjBjXVTvc"><img src="https://i.ytimg.com/vi/7DKjBjXVTvc/mqdefault.jpg" width="100%" alt="#18 k-Fold Cross-Validation" /></a><br/><sub><b>#18</b> k-Fold Cross-Validation</sub></td>
-    <td align="center" width="25%"><a href="https://youtu.be/maeb4QcWUuI"><img src="https://i.ytimg.com/vi/maeb4QcWUuI/mqdefault.jpg" width="100%" alt="#19 The Bootstrap" /></a><br/><sub><b>#19</b> The Bootstrap</sub></td>
-    <td align="center" width="25%"><a href="https://youtu.be/yR1gnwKCDN8"><img src="https://i.ytimg.com/vi/yR1gnwKCDN8/mqdefault.jpg" width="100%" alt="#20 Best Subset &amp; Stepwise" /></a><br/><sub><b>#20</b> Best Subset &amp; Stepwise</sub></td>
-  </tr>
-  <tr>
-    <td align="center" width="25%"><a href="https://youtu.be/sGr9s7k0KZM"><img src="https://i.ytimg.com/vi/sGr9s7k0KZM/mqdefault.jpg" width="100%" alt="#21 Ridge Regression" /></a><br/><sub><b>#21</b> Ridge Regression</sub></td>
     <td align="center" width="25%"><a href="https://youtu.be/rSAI0ScSx40"><img src="https://i.ytimg.com/vi/rSAI0ScSx40/mqdefault.jpg" width="100%" alt="#22 The Lasso" /></a><br/><sub><b>#22</b> The Lasso</sub></td>
-    <td></td>
-    <td></td>
   </tr>
 </table>
 
@@ -115,61 +89,173 @@
 
 ---
 
-## 🚀 Quickstart
+## 📋 Requirements
 
-Tested on macOS (Apple Silicon). Models download on first use.
+| | Needed | Notes |
+|---|---|---|
+| **OS** | macOS on Apple Silicon | Developed and tested there. Linux should work (see [cloud notes](docs/CUSTOMIZE.md#4-a-weak-computer-or-the-cloud)); Windows untested |
+| **Node.js** | 20+ | Remotion and headless Chrome |
+| **uv** | any recent | Runs the Python engine and the TTS / music tool environments |
+| **FFmpeg** | any recent | Mixing, loudness, joining clips |
+| **espeak-ng** | any recent | Phonemes for the English voice (Kokoro) |
+| **Disk / network** | several GB, internet on first run | Models download on first use |
+| **GPU** | optional | Only music generation (ACE-Step) really wants one; Apple Silicon is fine |
+
+---
+
+## 📦 Installation
 
 ```bash
+# 1. System packages (macOS)
 brew install uv node ffmpeg espeak-ng
-git clone https://github.com/FluteInTheRain/whyloop.git && cd whyloop
-./scripts/setup.sh                                   # VieNeu-TTS, ACE-Step, Kokoro venv, npm install, sound effects
 
+# 2. Code + third-party tools: VieNeu-TTS and ACE-Step into tools/, Kokoro venv, npm install, sound effects
+git clone https://github.com/FluteInTheRain/whyloop.git && cd whyloop
+./scripts/setup.sh
+
+# 3. Things the repo does not ship
+uv run --project tools/acestep python scripts/gen_music.py --duration 40 --out assets/music/lofi_chill.wav \
+  --caption "lo-fi hip hop, mellow electric piano, soft drums, warm vinyl texture, relaxed study beat"   # or copy any WAV there
+./make-video brand build                            # intro and outro clips (cached)
+
+# 4. Check that rendering works
+npm run studio                                      # opens Remotion Studio in the browser
+```
+
+<details>
+<summary><b>Minimal install (no VieNeu, no ACE-Step, e.g. a weak laptop or a Linux VM)</b></summary>
+
+```bash
+npm install
+uv venv tools/kokoro/.venv && uv pip install --python tools/kokoro/.venv/bin/python kokoro-onnx soundfile
+python3 scripts/make_sfx.py
+```
+
+Then render with your own music and no Vietnamese dub (`--music <name> --no-dub`). On a machine without a GPU set
+`WHYLOOP_RENDER_GL=swangle`.
+</details>
+
+---
+
+## 🚀 Usage
+
+**Your first video** (the bundled 25-second example, no private content needed):
+
+```bash
 ./make-video check  examples/hello-whyloop          # schema, ending, pronunciation, length estimate
-./make-video lint   examples/hello-whyloop --png    # must print "0 vấn đề" (0 problems)
+./make-video lint   examples/hello-whyloop --png    # must print "0 vấn đề" (0 problems); images in out/review/
 ./make-video render examples/hello-whyloop --mode demo --voice "Hải Đăng" --music lofi_chill --no-dub
 ```
 
-`lofi_chill` needs `assets/music/lofi_chill.wav` (generate it with ACE-Step or drop in your own WAV). On a weak machine add
-`WHYLOOP_RENDER_SCALE=1 WHYLOOP_RENDER_CONCURRENCY=2`. To write a new episode, open Claude Code here and run `/make-video <topic>`.
+The video lands in `out/`. A progress page opens in the browser while it renders.
 
-| Job (M4 Pro, 48 GB) | Time |
-|---|:---:|
-| Intro + outro, first build | ≈ 20 s |
-| 30-second demo | ≈ 1 to 2 min |
-| Full 5-minute video | ≈ 3.5 to 5.5 min |
+**Your own episode:** open Claude Code in the repo and run `/make-video <topic>`, or copy a file from [`templates/`](templates/)
+to `series/<series>/episodes/<NN-slug>/script.json`, then run the same `check → lint → render`.
 
----
+<details>
+<summary><b>All commands</b></summary>
 
-## 🎨 Make It Yours
-
-| Change | Edit |
+| Command | What it does |
 |---|---|
-| Topic and words | `script.json` (start from [`examples/`](examples/) or one of the 10 [`templates/`](templates/)) |
-| Computed numbers | A `gen_script.py` that writes `script.json` (see [`docs/demo/gen_demo.py`](docs/demo/gen_demo.py)) |
-| Look | `config.json → theme`, or a new block in [`src/theme.ts`](src/theme.ts) |
-| Channel, voice, music | `config.json → channel`, `voices`, `music`; then `./make-video brand build --force` |
-| Resolution | `config.json → render.scale`: `1` = 1080p, `4/3` = 1440p, `2` = 4K |
+| `./make-video check <episode>` | Validate the script, estimate length, warn about layout and pronunciation |
+| `./make-video lint <episode> [--png]` | Render the end of every beat and report overlapping or clipped text |
+| `./make-video render <episode> [--mode demo] [--voice V] [--music M] [--theme T] [--no-dub]` | Full pipeline to `out/<tag>.mp4` (+ `.vi.m4a`) |
+| `./make-video say "text" [--voice V]` | Hear how a line is pronounced |
+| `./make-video voice add <audio> --name N` · `list` · `remove` | Clone and manage Vietnamese voices |
+| `./make-video brand build [--force]` · `status` | Build or inspect the cached intro / outro |
+| `./make-video assets search <words> [--remote]` · `add` · `list` · `sync` | Licence-filtered icon library |
+| `./make-video book ingest <file> --slug S --title T` · `page` | Import a reference book |
+| `./make-video catalog` · `publish <episode> --url U` | Episode list and status |
+| `./make-video youtube auth` · `status` · `upload <episode> [--dry-run]` · `resume` · `public` · `captions` · `delete` | Publish with the YouTube Data API |
+| `python3 scripts/captions.py <episode>` | `captions.en.srt` + `captions.vi.srt` from the real timing |
 
-📘 [docs/CUSTOMIZE.md](docs/CUSTOMIZE.md) (full guide) · [docs/USAGE.md](docs/USAGE.md) (every command, Vietnamese) · [CLAUDE.md](CLAUDE.md) (rules for the AI assistant)
+Full manual with every option (Vietnamese): [docs/USAGE.md](docs/USAGE.md).
+</details>
+
+**Render time** (M4 Pro, 48 GB): intro + outro first build ≈ 20 s · 30-second demo ≈ 1 to 2 min · full 5-minute video ≈ 3.5 to 5.5 min.
 
 ---
 
-## 📁 Repository Map
+## 🔧 Configuration
+
+Everything lives in [`config.json`](config.json); environment variables override the render settings for one run.
+
+| Key | Default | What it controls |
+|---|---|---|
+| `theme` | `spectrum` | Look of every scene (`--theme` overrides) |
+| `render.scale` | `4/3` → 2560×1440 | `1` = 1080p, `2` = 4K. Must be exactly one of these |
+| `render.concurrency` / `render.gl` | `10` / `angle` | Remotion processes and GL backend |
+| `default_voice`, `voices`, `voice_mixes` | `Khang Mix` | Vietnamese voices and voice blends (`Khang Mix` is the author's own; use `Hải Đăng`) |
+| `languages.en.voices` | `am_michael`, `af_heart` | English Kokoro voice paired with each Vietnamese voice |
+| `music`, `music_offset_db`, `target_lufs` | 6 tracks, `8`, `-16` | Music beds, music level under the voice, loudness |
+| `beat_gap_sec`, `pad_sec`, `fps` | `0.45`, `0.6`, `30` | Pause after a beat, after a scene, frame rate |
+| `channel` | WhyLoop | Name, tagline, font, avatar, intro / outro lines |
+
+| Environment variable | Example | Effect |
+|---|---|---|
+| `WHYLOOP_RENDER_SCALE` | `1` | Render at 1080p for this run |
+| `WHYLOOP_RENDER_CONCURRENCY` | `2` | Fewer Remotion processes on a small machine |
+| `WHYLOOP_RENDER_GL` | `swangle` | Software GL when there is no GPU |
+
+To make it yours (topic, look, channel, voice, languages) see **[docs/CUSTOMIZE.md](docs/CUSTOMIZE.md)**.
+
+---
+
+## 📁 Project Structure
 
 ```text
-make-video          CLI: check · lint · render · brand · say · voice · youtube · catalog
-scripts/            Python engine (make_video.py), lint, TTS, music, captions, YouTube upload
-src/                Remotion app: Video, DiagramScene, math nodes, mascot, icons, themes, thumbnails
-templates/          10 starter scripts          examples/   runnable bilingual episode
-assets/             brand, 752 licence-filtered icons, sound effects
-docs/               USAGE, CUSTOMIZE, demo generator, images
+whyloop/
+├── make-video                 # CLI entry point
+├── config.json                # Voices, music, timing, render, theme, channel, languages
+├── pronunciation*.json        # Pronunciation fixes (Vietnamese, English)
+├── scripts/                   # Python engine
+│   ├── make_video.py          #   orchestrator: check · lint · render · brand · say · voice
+│   ├── lint_props.py          #   script → fixed-length timeline for the linter
+│   ├── lint_frames.mjs        #   headless Chrome stills + element boxes per beat
+│   ├── lint_report.py         #   boxes → overlap / off-screen problems
+│   ├── kokoro_tts.py          #   English TTS worker
+│   ├── gen_music.py           #   ACE-Step music generator
+│   ├── captions.py            #   SRT captions from real timing
+│   ├── youtube.py             #   upload, resume, captions, playlist
+│   └── setup.sh               #   reinstall everything not in git
+├── src/                       # Remotion app (TypeScript + React)
+│   ├── Root.tsx               #   compositions: Main, Thumbnail, sheets, Promo
+│   ├── Video.tsx              #   scene timeline, backdrop, brand tag
+│   ├── diagram.tsx            #   DiagramScene: beats, edges, camera, lint probe
+│   ├── math.tsx               #   plot, equation, stat, table
+│   ├── mascot.tsx · icons.tsx #   characters · icons
+│   ├── theme.ts               #   9 themes, fonts
+│   └── Thumbnail.tsx          #   metaphor-scene thumbnails
+├── templates/                 # 10 starter scripts
+├── examples/hello-whyloop/    # runnable bilingual example
+├── assets/                    # brand, 752-icon library, sound effects
+├── docs/                      # USAGE, CUSTOMIZE, demo generator, images
+├── .claude/skills/            # /make-video and /plan-series
+└── CLAUDE.md                  # rules the AI assistant follows
 ```
 
+Generated, not in git: `out/` (videos, review images), `public/` (staged audio and icons), `tools/` (third-party models).
 Episode content (`series/`) and book material (`books/`) stay out of this public repo.
 
 ---
 
-## ⚖️ License & Credits
+## 🚧 Limitations
+
+- Vector animation only: no live-action footage and no AI-generated images.
+- Real narration length differs from the estimate by about 10 to 15%, and TTS pronunciation is not guaranteed (fix words in `pronunciation*.json`).
+- The Vietnamese preset voices have open licence questions, noted in [LICENSES.md](LICENSES.md).
+- Remotion Lambda / Cloud Run are not wired in: rendering is local.
+
+---
+
+## 👤 Author
+
+**Nguyen Nhat Khang** · GitHub [@FluteInTheRain](https://github.com/FluteInTheRain) ·
+YouTube [WhyLoop](https://www.youtube.com/channel/UCxnTeZD7YM3adHAdMTf2kpQ)
+
+---
+
+## 📜 License & Credits
 
 Code: **MIT** ([LICENSE](LICENSE)). Not covered: the WhyLoop name, the mascot Bít and `assets/brand/` (all rights reserved), third-party
 icons in `assets/library/` (own licences, see [ATTRIBUTION.md](assets/library/ATTRIBUTION.md)). Details: [LICENSES.md](LICENSES.md).
