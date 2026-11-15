@@ -1,7 +1,7 @@
 # Make it yours: customise WhyLoop
 
 This guide is for someone who cloned the repo and wants to make **their own** videos: other topics, another look, another
-voice, or a setup that does not need a powerful Mac. It assumes you did the install in the [README](../README.md#install).
+voice, or a setup that does not need a powerful Mac. It assumes you did the install in the [README](../README.md#-installation).
 The Vietnamese operating manual with every command is [USAGE.md](USAGE.md).
 
 Everything below was run on macOS (Apple Silicon). Where I describe Linux or cloud machines I say so: those parts are
